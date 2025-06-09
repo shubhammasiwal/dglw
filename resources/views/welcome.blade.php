@@ -9,14 +9,9 @@
     <meta name="generator" content="Astro v5.7.10">
     <title>Carousel Template · Bootstrap v5.3</title>
     <script src="{{ asset('js/color-modes.js') }}"></script>
-
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
     <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
     <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
     <link href="{{ asset('css/carousel.css') }}" rel="stylesheet">
     <style>
@@ -103,7 +98,8 @@
     </style>
 </head>
 
-<body> <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path
                 d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z">
@@ -126,207 +122,297 @@
             </path>
         </symbol>
     </svg>
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"> <button
-            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)"> <svg
-                class="bi my-1 theme-icon-active" aria-hidden="true">
+    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+        <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
+            aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+            <svg class="bi my-1 theme-icon-active" aria-hidden="true">
                 <use href="#circle-half"></use>
-            </svg> <span class="visually-hidden" id="bd-theme-text">Toggle theme</span> </button>
+            </svg>
+            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+        </button>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-            <li> <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                    aria-pressed="false"> <svg class="bi me-2 opacity-50" aria-hidden="true">
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                    aria-pressed="false">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
                         <use href="#sun-fill"></use>
-                    </svg>
-                    Light
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                    </svg> Light <svg class="bi ms-auto d-none" aria-hidden="true">
                         <use href="#check2"></use>
-                    </svg> </button> </li>
-            <li> <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
-                    aria-pressed="false"> <svg class="bi me-2 opacity-50" aria-hidden="true">
+                    </svg>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                    aria-pressed="false">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
                         <use href="#moon-stars-fill"></use>
-                    </svg>
-                    Dark
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                    </svg> Dark <svg class="bi ms-auto d-none" aria-hidden="true">
                         <use href="#check2"></use>
-                    </svg> </button> </li>
-            <li> <button type="button" class="dropdown-item d-flex align-items-center active"
-                    data-bs-theme-value="auto" aria-pressed="true"> <svg class="bi me-2 opacity-50" aria-hidden="true">
+                    </svg>
+                </button>
+            </li>
+            <li>
+                <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto"
+                    aria-pressed="true">
+                    <svg class="bi me-2 opacity-50" aria-hidden="true">
                         <use href="#circle-half"></use>
-                    </svg>
-                    Auto
-                    <svg class="bi ms-auto d-none" aria-hidden="true">
+                    </svg> Auto <svg class="bi ms-auto d-none" aria-hidden="true">
                         <use href="#check2"></use>
-                    </svg> </button> </li>
+                    </svg>
+                </button>
+            </li>
         </ul>
     </div>
     <header data-bs-theme="dark">
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <div class="container-fluid"> <a class="navbar-brand" href="#">Carousel</a> <button
-                    class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"> <span
-                        class="navbar-toggler-icon"></span> </button>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ route('landing') }}">{{ env('APP_NAME') }}</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item"> <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('landing') }}">Home</a>
                         </li>
-                        <li class="nav-item"> <a class="nav-link" href="#">Link</a> </li>
-                        <li class="nav-item"> <a class="nav-link disabled" aria-disabled="true">Disabled</a> </li>
                     </ul>
-                    <form class="d-flex" role="search"> <input class="form-control me-2" type="search"
-                            placeholder="Search" aria-label="Search"> <button class="btn btn-outline-success"
-                            type="submit">Search</button> </form>
+                    <div class="d-flex">
+                        <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary">Sign Up</a>
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
     <main>
         <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-            <div class="carousel-indicators"> <button type="button" data-bs-target="#myCarousel"
-                    data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> <button
-                    type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button> </div>
+                    aria-label="Slide 3"></button>
+            </div>
             <div class="carousel-inner">
-                <div class="carousel-item active"> <svg aria-hidden="true" class="bd-placeholder-img "
-                        height="100%" preserveAspectRatio="xMidYMid slice" width="100%"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
+                <div class="carousel-item active"
+                    style="background: url('{{ asset('images/banner_101.jpg') }}') center center / cover no-repeat; min-height: 400px;">
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h1>Example headline.</h1>
                             <p class="opacity-75">Some representative placeholder content for the first slide of the
                                 carousel.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item"> <svg aria-hidden="true" class="bd-placeholder-img " height="100%"
-                        preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
+                <div class="carousel-item"
+                    style="background: url('{{ asset('images/banner_101.jpg') }}') center center / cover no-repeat; min-height: 400px;">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Another example headline.</h1>
-                            <p>Some representative placeholder content for the second slide of the carousel.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                            <h1>Example headline.</h1>
+                            <p class="opacity-75">Some representative placeholder content for the first slide of the
+                                carousel.</p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item"> <svg aria-hidden="true" class="bd-placeholder-img " height="100%"
-                        preserveAspectRatio="xMidYMid slice" width="100%" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
+                <div class="carousel-item"
+                    style="background: url('{{ asset('images/banner_101.jpg') }}') center center / cover no-repeat; min-height: 400px;">
                     <div class="container">
                         <div class="carousel-caption text-end">
-                            <h1>One more for good measure.</h1>
-                            <p>Some representative placeholder content for the third slide of this carousel.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                            <h1>Example headline.</h1>
+                            <p class="opacity-75">Some representative placeholder content for the first slide of the
+                                carousel.</p>
+                            <p>
+                                <a class="btn btn-lg btn-primary" href="#">Sign up today</a>
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div> <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel"
-                data-bs-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-                    class="visually-hidden">Previous</span> </button> <button class="carousel-control-next"
-                type="button" data-bs-target="#myCarousel" data-bs-slide="next"> <span
-                    class="carousel-control-next-icon" aria-hidden="true"></span> <span
-                    class="visually-hidden">Next</span> </button>
-        </div> <!-- Marketing messaging and featurettes
-  ================================================== -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <!-- Marketing messaging and featurettes ================================================== -->
         <!-- Wrap the rest of the page in another container to center all the content. -->
-        <div class="container marketing"> <!-- Three columns of text below the carousel -->
+        <div class="container marketing">
+            <!-- Three columns of text below the carousel -->
             <div class="row">
-                <div class="col-lg-4"> <svg aria-label="Placeholder" class="bd-placeholder-img rounded-circle"
-                        height="140" preserveAspectRatio="xMidYMid slice" role="img" width="140"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>Some representative placeholder content for the three columns of text below the carousel. This is
-                        the first column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4"> <svg aria-label="Placeholder" class="bd-placeholder-img rounded-circle"
-                        height="140" preserveAspectRatio="xMidYMid slice" role="img" width="140"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>Another exciting bit of representative placeholder content. This time, we've moved on to the
-                        second column.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4"> <svg aria-label="Placeholder" class="bd-placeholder-img rounded-circle"
-                        height="140" preserveAspectRatio="xMidYMid slice" role="img" width="140"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
-                    </svg>
-                    <h2 class="fw-normal">Heading</h2>
-                    <p>And lastly this, the third column of representative placeholder content.</p>
-                    <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
-            </div><!-- /.row --> <!-- START THE FEATURETTES -->
+                <div class="col-lg-4">
+                    <img src="{{ asset('images/narendra_modi.png') }}" alt="Profile" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2 class="fw-normal">Narendra Modi</h2>
+                    <p>Prime Minister</p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <img src="{{ asset('images/honorable_minister.png') }}" alt="Profile" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2 class="fw-normal">Dr. Mansukh Mandaviya</h2>
+                    <p>Hon'ble Minister</p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <img src="{{ asset('images/ministerofstatemole.png') }}" alt="Profile" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                    <h2 class="fw-normal">Sushri Shobha Karandlaje</h2>
+                    <p>Hon'ble Minister of State</p>
+                    <p>
+                        <a class="btn btn-secondary" href="#">View details &raquo;</a>
+                    </p>
+                </div>
+                <!-- /.col-lg-4 -->
+            </div>
+            <!-- /.row -->
+            <!-- START THE FEATURETTES -->
             <hr class="featurette-divider">
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span
-                            class="text-body-secondary">It’ll blow your mind.</span></h2>
-                    <p class="lead">Some great placeholder content for the first featurette here. Imagine some
-                        exciting prose here.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Scheme <span
+                            class="text-body-secondary">Title</span>
+                    </h2>
+                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum magni saepe unde animi sequi soluta odit architecto accusantium voluptatum dignissimos dolores, obcaecati sapiente necessitatibus reiciendis autem laborum vitae consequuntur neque?</p>
                 </div>
-                <div class="col-md-5"> <svg aria-label="Placeholder: 500x500"
+                <div class="col-md-5">
+                    <svg aria-label="Placeholder: 500x500"
                         class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
                         height="500" preserveAspectRatio="xMidYMid slice" role="img" width="500"
                         xmlns="http://www.w3.org/2000/svg">
                         <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%"
-                            y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg> </div>
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
+                        <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+                    </svg>
+                </div>
             </div>
             <hr class="featurette-divider">
             <div class="row featurette">
                 <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span
-                            class="text-body-secondary">See for yourself.</span></h2>
-                    <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea
-                        of how this layout would work with some actual real-world content in place.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Scheme <span
+                            class="text-body-secondary">Title</span>
+                    </h2>
+                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum magni saepe unde animi sequi soluta odit architecto accusantium voluptatum dignissimos dolores, obcaecati sapiente necessitatibus reiciendis autem laborum vitae consequuntur neque?</p>
                 </div>
-                <div class="col-md-5 order-md-1"> <svg aria-label="Placeholder: 500x500"
+                <div class="col-md-5 order-md-1">
+                    <svg aria-label="Placeholder: 500x500"
                         class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
                         height="500" preserveAspectRatio="xMidYMid slice" role="img" width="500"
                         xmlns="http://www.w3.org/2000/svg">
                         <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%"
-                            y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg> </div>
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
+                        <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+                    </svg>
+                </div>
             </div>
             <hr class="featurette-divider">
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span
-                            class="text-body-secondary">Checkmate.</span></h2>
-                    <p class="lead">And yes, this is the last block of representative placeholder content. Again, not
-                        really intended to be actually read, simply here to give you a better view of what this would
-                        look like with some actual content. Your content.</p>
+                    <h2 class="featurette-heading fw-normal lh-1">Scheme <span
+                            class="text-body-secondary">Title</span>
+                    </h2>
+                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum magni saepe unde animi sequi soluta odit architecto accusantium voluptatum dignissimos dolores, obcaecati sapiente necessitatibus reiciendis autem laborum vitae consequuntur neque?</p>
                 </div>
-                <div class="col-md-5"> <svg aria-label="Placeholder: 500x500"
+                <div class="col-md-5">
+                    <svg aria-label="Placeholder: 500x500"
                         class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
                         height="500" preserveAspectRatio="xMidYMid slice" role="img" width="500"
                         xmlns="http://www.w3.org/2000/svg">
                         <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%"
-                            y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
-                    </svg> </div>
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
+                        <text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text>
+                    </svg>
+                </div>
             </div>
-            <hr class="featurette-divider"> <!-- /END THE FEATURETTES -->
-        </div><!-- /.container --> <!-- FOOTER -->
-        <footer class="container">
-            <p class="float-end"><a href="#">Back to top</a></p>
-            <p>&copy; 2017–2025 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a
-                    href="#">Terms</a></p>
+            <hr class="featurette-divider">
+            <!-- /END THE FEATURETTES -->
+        </div>
+        <!-- /.container -->
+        <!-- FOOTER -->
+        <footer style="background-color: #212529;">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4 g-4 our-details">
+                    <div class="col">
+                    <div class="card h-100 bg-transparent border-0  ">
+                        <a href="https://bocw.shramsuvidha.gov.in/">
+                        <img src="https://bocw.shramsuvidha.gov.in//front/images/multiple-use/header/logo.png" class="card-img-top img-fluid " alt="..." tabindex="0">
+                        </a>
+                        <div class="card-body px-0 py-3 ">
+                        <p class="card-text text-light" tabindex="0">Please use email preferably for making any technical query/complaint or feedback/suggestion regarding BOCW MIS Portal.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card h-100 bg-transparent border-0">
+                        <div class="industry-info">
+                        <div class="position-relative">
+                            <div class="divide-column position-absolute "></div>
+                            <h4 class="ms-3 text-light" tabindex="0">Our Link</h4>
+                        </div>
+                        <ul class="d-flex flex-column  mt-3 row-gap-2  ms-3  ">
+                            <li>
+                                <a class="text-light" href="#">BOCW Login</a>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card h-100 bg-transparent border-0">
+                        <div class="touch-info">
+                        <div class="position-relative">
+                            <div class="divide-column position-absolute "></div>
+                            <h4 class="ms-3 text-light" tabindex="0">Get In Touch</h4>
+                        </div>
+                        <ul class="d-flex flex-column  mt-3 row-gap-2  ms-3  ">
+                            <li class="text-light mb-2">Ministry of Labour and Employment Shram Shakti Bhawan Rafi Marg, New Delhi -110001</li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                    <div class="card h-100 bg-transparent border-0">
+                        <div class="working-info">
+                        <div class="position-relative">
+                            <div class="divide-column position-absolute "></div>
+                            <h4 class="ms-3 text-light" tabindex="0">Working Hours</h4>
+                        </div>
+                        <ul class="mt-3 ms-3 text-light">
+                            <li>
+                            <div class="d-flex justify-content-between "> (9:00 AM to 5:30 PM on working days) </div>
+                            <hr>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="term-and-condition">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center copy-right-content ">
+                    <div class="text-light copy-right">© 2025 designed, developed and hosted by National Informatics Centre (NIC) </div>
+                    <div class="button-div">
+                        <a href="#" class="up-to-down-btn to-top active">
+                        <i class="bi bi-chevron-double-up"></i>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     </main>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}" class="astro-vvvwv3sm"></script>
