@@ -11,4 +11,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        assets: [{
+            src: 'resources/css/app.css',
+            dest: 'public/css',
+        }],
+    },
 });
