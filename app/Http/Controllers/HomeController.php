@@ -23,6 +23,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $registered_beedi_worker = 999999;
+        $registered_cine_worker = 999999;
+        $registered_non_coal_mine_worker = 999999;
+        $under_process_beedi_worker = 111111;
+        $under_process_cine_worker = 111111;
+        $under_process_non_coal_mine_worker = 111111;
+
+        return view('dashboard', compact('registered_beedi_worker', 'registered_cine_worker', 'registered_non_coal_mine_worker', 'under_process_beedi_worker', 'under_process_cine_worker', 'under_process_non_coal_mine_worker'));
     }
 }
