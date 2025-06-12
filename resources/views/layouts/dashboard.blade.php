@@ -33,6 +33,8 @@
         <link rel="stylesheet" href="{{ asset('vendor/daterangepicker/css/daterangepicker.css') }}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('vendor/summernote/css/summernote-bs4.min.css') }}">
+        @stack('styles')
+
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -281,6 +283,7 @@
         {{-- <script defer src="{{ asset('vendor/cloudflare/beacon.min.js') }}"
             data-cf-beacon='{"rayId":"94d83f2398b3ad28","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.5.0","token":"2437d112162f4ec4b63c3ca0eb38fb20"}'
             crossorigin="anonymous"></script> --}}
+        @stack('scripts')
     </body>
 
 </html>

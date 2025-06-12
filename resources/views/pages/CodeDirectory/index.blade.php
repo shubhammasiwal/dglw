@@ -53,7 +53,7 @@
                             @foreach ($code_directories as $code_directory)
                                 @if ($code_directory)
                                     <tr>
-                                        <td>{{ $code_directory->id }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>{{ $code_directory->code }}</td>
                                         <td>{{ $code_directory->name }}</td>
                                         <td>{{ $code_directory->table_name }}</td>
@@ -68,7 +68,8 @@
                                                 title="Edit">
                                                 <i class="nav-icon fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('code-directory.destroy', $code_directory->id) }}" method="POST">
+                                            <form action="{{ route('code-directory.destroy', $code_directory->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" title="Delete"
@@ -91,3 +92,25 @@
     </section>
     <!-- /.main-content -->
 @endsection
+@push('styles')
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+@endpush
+
+@push('scripts')
+    <!-- jQuery -->
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> --}}
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#codeDirectoryTable').DataTable({
+                responsive: true,
+                "columnDefs": [
+                    { "orderable": false, "targets": -1 }
+                ]
+            });
+        });
+    </script>
+@endpush

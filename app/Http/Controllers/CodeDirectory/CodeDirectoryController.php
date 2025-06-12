@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CodeDirectory;
 
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
@@ -15,7 +16,7 @@ class CodeDirectoryController extends Controller
      */
     public function index()
     {
-        $code_directories = CodeDirectory::all();
+        $code_directories = CodeDirectory::orderByDesc('created_at')->get();
         $code_directories->transform(function ($item) {
             $item->table_name = ucwords(str_replace('_', ' ', $item->table_name));
             return $item;
@@ -111,7 +112,7 @@ class CodeDirectoryController extends Controller
     public function edit(string $id)
     {
         $code_directory = CodeDirectory::findOrFail($id);
-        $code_directory->table_name = ucwords(str_replace('_', ' ', $code_directory->table_name));
+        $code_directory->table_name_label = ucwords(str_replace('_', ' ', $code_directory->table_name));
         return view('pages.CodeDirectory.edit', compact('code_directory'));
     }
 
@@ -122,21 +123,29 @@ class CodeDirectoryController extends Controller
     {
         try {
             $request->validate([
-                'code' => ['required', 'string', 'max:255', "unique:code_directories,code,{$id}"],
+                'code' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('code_directories')->where(function ($query) use ($request) {
+                        return $query->where('table_name', $request->table_name);
+                    })->ignore($id),
+                ],
                 'name' => ['required', 'string', 'max:255'],
-                'table_name' => ['required', 'string', "unique:code_directories,table_name,{$id}"],
+                'table_name' => ['required', 'string'],
             ], [
                 'code.required' => 'Code is required.',
                 'code.string' => 'Code must be a string.',
                 'code.max' => 'Code must not be greater than 255 characters.',
-                'code.unique' => 'Code has already been taken.',
+                'code.unique' => 'This code and category combination has already been taken.',
                 'name.required' => 'Name is required.',
                 'name.string' => 'Name must be a string.',
                 'name.max' => 'Name must not be greater than 255 characters.',
                 'table_name.required' => 'Table name is required.',
                 'table_name.string' => 'Table name must be a string.',
-                'table_name.unique' => 'Table name has already been taken.',
             ]);
+
+
 
             $code_directory = CodeDirectory::findOrFail($id);
 

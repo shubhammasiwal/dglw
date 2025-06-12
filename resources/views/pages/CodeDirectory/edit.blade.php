@@ -45,14 +45,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputTableName">Category Type</label>
-                                <input type="text" class="form-control" id="inputTableName" name="table_name" placeholder="Enter Category Type" value="{{ $code_directory->table_name }}" readonly>
+                                <input type="text" class="form-control" id="inputTableName" placeholder="Enter Category Type" value="{{ $code_directory->table_name_label }}" readonly>
+                                <input type="hidden" class="form-control" id="inputTableName" name="table_name" placeholder="Enter Category Type" value="{{ $code_directory->table_name }}" readonly>
                             </div>
                         </div>
                         <!-- /.card-body -->
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>
                     </form>
                 </div>
