@@ -96,134 +96,138 @@
                     <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
                 </a>
 
-                <!-- Sidebar -->
-                <div class="sidebar">
-                    <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="{{ asset('images/profile_picture_101.jpg') }}" class="img-circle elevation-2"
-                                alt="User Image">
+                @role(['portal_admin', 'admin', 'welfare_commissioner', 'data_operator'])
+                    <!-- Sidebar -->
+                    <div class="sidebar">
+                        <!-- Sidebar user panel (optional) -->
+                        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                            <div class="image">
+                                <img src="{{ asset('images/profile_picture_101.jpg') }}" class="img-circle elevation-2"
+                                    alt="User Image">
+                            </div>
+                            <div class="info">
+                                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+                            </div>
                         </div>
-                        <div class="info">
-                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                        </div>
-                    </div>
 
-                    <!-- Sidebar Menu -->
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-                            <li class="nav-item">
-                                <a href="{{ route('dashboard') }}" class="nav-link">
-                                    <i class="nav-icon fas fa-home"></i>
-                                    <p>Dashboard</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Worker's Menu
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
+                        <!-- Sidebar Menu -->
+                        <nav class="mt-2">
+                            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                                data-accordion="false">
+                                <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
+                                <li class="nav-item">
+                                    <a href="{{ route('dashboard') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-home"></i>
+                                        <p>Dashboard</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Worker's Menu
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('register-worker') }}" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Register Worker</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Registered Workers</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pages/layout/boxed.html" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Generate ID Card</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Add Family Member</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Add Benefit</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>View Benefits</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                @unlessrole('data_operator')
                                     <li class="nav-item">
-                                        <a href="{{ route('register-worker') }}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Register Worker</p>
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-chart-pie"></i>
+                                            <p>
+                                                Reports
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
                                         </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Report 1</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="pages/charts/flot.html" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Report 2</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Registered Workers</p>
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-folder-open"></i>
+                                            <p>
+                                                Directory Code
+                                                <i class="fas fa-angle-left right"></i>
+                                            </p>
                                         </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="pages/UI/general.html" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>States</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="pages/UI/icons.html" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Districts</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="pages/UI/buttons.html" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Categories</p>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/boxed.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Generate ID Card</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Add Family Member</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Add Benefit</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>View Benefits</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-chart-pie"></i>
-                                    <p>
-                                        Reports
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="pages/charts/chartjs.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Report 1</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/charts/flot.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Report 2</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-folder-open"></i>
-                                    <p>
-                                        Directory Code
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="pages/UI/general.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>States</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/UI/icons.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Districts</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="pages/UI/buttons.html" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Categories</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- /.sidebar-menu -->
-                </div>
-                <!-- /.sidebar -->
+                                @endunlessrole
+                            </ul>
+                        </nav>
+                        <!-- /.sidebar-menu -->
+                    </div>
+                    <!-- /.sidebar -->
+                @endrole
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
