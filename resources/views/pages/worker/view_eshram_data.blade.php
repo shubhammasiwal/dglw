@@ -29,27 +29,8 @@
                 <div class="card ">
                     <table class="table table-bordered">
                         <tr>
-                            <th>Worker Name</th>
-                            <td><input type="text" class="form-control" id="inputName" name="worker_name" placeholder="Enter Worker Name" value="{{ $worker_name }}" readonly></td>
-                        </tr>
-                        <tr>
                             <th>UAN</th>
                             <td><input type="text" class="form-control" id="inputUAN" name="worker_uan" placeholder="Enter UAN" value="{{ $worker_uan }}" readonly></td>
-                        </tr>
-                        <tr>
-                            <th>Date of Birth</th>
-                            <td>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" id="inputDOB" name="worker_dob" placeholder="DD-MMM-YYYY" value="{{ $worker_dob }}" readonly>
-                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Mobile Number</th>
-                            <td><input type="text" class="form-control" id="inputMobileNumber" name="worker_mobile_number" placeholder="Enter Mobile Number" value="{{ $worker_mobile_number }}" readonly></td>
                         </tr>
                         <tr>
                             <th>Address District Code</th>

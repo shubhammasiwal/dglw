@@ -274,8 +274,6 @@
         <script src="{{ asset('vendor/overlayScrollbars/js/OverlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.js') }}"></script>
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="{{ asset('vendor/adminlte/dist/js/demo.js') }}"></script>
         {{-- <script defer src="{{ asset('vendor/cloudflare/beacon.min.js') }}"
             data-cf-beacon='{"rayId":"94d83f2398b3ad28","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.5.0","token":"2437d112162f4ec4b63c3ca0eb38fb20"}'
             crossorigin="anonymous"></script> --}}
