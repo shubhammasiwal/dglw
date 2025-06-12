@@ -11,6 +11,7 @@ return [
         'math' => false,
         'expire' => 60,
         'encrypt' => false,
+        'fontColors' => ['#303f9f', '#c0392b', '#16a085']
     ],
     'math' => [
         'length' => 9,

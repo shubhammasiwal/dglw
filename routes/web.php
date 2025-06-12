@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Worker\WorkerController;
+use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
+use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 
 Auth::routes();
 
@@ -21,10 +23,15 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner|dat
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 });
 
-Route::group(['middleware' => ['role:portal_admin']], function () {
+Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']], function () {
     // Register Worker Flow
     Route::get('/register-worker', [WorkerController::class, 'registerWorker'])->name('register-worker');
     Route::post('/validate-worker-otp', [WorkerController::class, 'validateWorkerOTP'])->name('validate-worker-otp');
     Route::post('/validating-otp', [WorkerController::class, 'validatingOTP'])->name('validating-otp');
     Route::post('/post-eshram-data', [WorkerController::class, 'postEshramData'])->name('post-eshram-data');
+});
+
+Route::group(['middleware' => ['role:portal_admin|admin']], function () {
+    Route::resource('code-directory', CodeDirectoryController::class);
+    Route::resource('martial-status', MaritalStatusController::class);
 });

@@ -202,9 +202,9 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="pages/UI/general.html" class="nav-link">
+                                                <a href="{{ route('code-directory.index') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>States</p>
+                                                    <p>All Codes</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">

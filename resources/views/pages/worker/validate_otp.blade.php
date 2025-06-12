@@ -9,15 +9,15 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">Register Worker | Validate OTP</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         Worker's Menu / 
                         <li class="breadcrumb-item active"><a href="{{ route('register-worker') }}">Register Worker</a></li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /.content-header -->
 

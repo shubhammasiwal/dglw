@@ -8,5 +8,6 @@
         <p class="fs-5 text-muted">Something went wrong!</p>
     </div>
 
-    <h2 class="display-6 text-center mb-4">Maybe this page doesn't exist!</h2>
+    <h2 class="display-6 text-center mb-4">{{ $message }}</h2>
 @endsection
+
