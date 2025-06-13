@@ -28,7 +28,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <div class="container">
+        <div class="container-fluid">
             <div class="card ">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -37,7 +37,7 @@
                     </div>
                 @endif
                 <div class="table-responsive">
-                    <table id="codeDirectoryTable" class="table table-bordered table-striped">
+                    <table id="codeDirectoryTable" class="table table-bordered table-striped table-hover table-sm shadow">
                         <thead>
                             <tr>
                                 <th>ID</th>
