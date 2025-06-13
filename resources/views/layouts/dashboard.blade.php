@@ -19,8 +19,6 @@
         <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <!-- Tempusdominus Bootstrap 4 -->
-        {{-- <link rel="stylesheet" href="{{ asset('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"> --}}
         <!-- iCheck -->
         <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/css/icheck-bootstrap.min.css') }}">
         <!-- JQVMap -->
@@ -272,17 +270,12 @@
         <!-- daterangepicker -->
         <script src="{{ asset('vendor/moment/js/moment.min.js') }}"></script>
         <script src="{{ asset('vendor/daterangepicker/js/daterangepicker.min.js') }}"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        {{-- <script src="{{ asset('vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script> --}}
         <!-- Summernote -->
         <script src="{{ asset('vendor/summernote/js/summernote-bs4.min.js') }}"></script>
         <!-- overlayScrollbars -->
         <script src="{{ asset('vendor/overlayScrollbars/js/OverlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.js') }}"></script>
-        {{-- <script defer src="{{ asset('vendor/cloudflare/beacon.min.js') }}"
-            data-cf-beacon='{"rayId":"94d83f2398b3ad28","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.5.0","token":"2437d112162f4ec4b63c3ca0eb38fb20"}'
-            crossorigin="anonymous"></script> --}}
         @stack('scripts')
     </body>
 
