@@ -33,5 +33,5 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']],
 
 Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('code-directory', CodeDirectoryController::class);
-    Route::resource('martial-status', MaritalStatusController::class);
+    Route::resource('marital-status', MaritalStatusController::class);
 });

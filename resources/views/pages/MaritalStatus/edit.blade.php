@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'CODE DIRECTORY | CREATE')
+@section('title', 'MARITAL STATUS | EDIT')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Code Directory | Create</h1>
+                    <h1 class="m-0">Marital Status | Edit</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('code-directory.index') }}">Directory Code</a></li>
-                        <li class="breadcrumb-item active">Create Directory Code</li>
+                        <li class="breadcrumb-item"><a href="{{ route('marital-status.index') }}">Marital Status</a></li>
+                        <li class="breadcrumb-item active">Edit Marital Status</li>
                     </ol>
                 </div>
             </div>
@@ -31,14 +31,14 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('code-directory.store') }}">
+                <form method="POST" action="{{ route('marital-status.update', $marital_status->id) }}">
                     @csrf
+                    @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="inputCode">Code</label>
                             <input type="text" class="form-control @error('code') is-invalid @enderror" id="inputCode"
-                                name="code" placeholder="Enter Code" value="{{ old('code') }}">
-
+                                name="code" placeholder="Enter Code" value="{{ old('code', $marital_status->codeDirectory->code) }}">
                             @error('code')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -48,8 +48,7 @@
                         <div class="form-group">
                             <label for="inputName">Name</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName"
-                                name="name" placeholder="Enter Name" value="{{ old('name') }}">
-
+                                name="name" placeholder="Enter Name" value="{{ old('name', $marital_status->name) }}">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -57,28 +56,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="inputTableName">Category Type</label>
-                            <select class="form-control @error('table_name') is-invalid @enderror" id="inputTableName"
-                                name="table_name">
-                                <option value="">Select Category Type</option>
-                                @foreach ($tables as $key => $table)
-                                    <option value="{{ $key }}" {{ old('table_name') == $key ? 'selected' : '' }}>
-                                        {{ $table }}</option>
-                                @endforeach
-                            </select>
-
-                            @error('table_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input type="hidden" class="form-control" id="inputTableName" name="table_name" placeholder="Enter Category Type" value="{{ $table_name }}" readonly>
                         </div>
                     </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                 </form>
             </div>

@@ -22,42 +22,55 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-        <section class="content">
-            <div class="container">
-                <div class="card ">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Success!</strong> {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <section class="content">
+        <div class="container">
+            <div class="card ">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('code-directory.update', $code_directory->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputCode">Code</label>
+                            <input type="text" class="form-control @error('code') is-invalid @enderror" id="inputCode"
+                                name="code" placeholder="Enter Code" value="{{ old('code', $code_directory->code) }}">
+                            @error('code')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                    @endif
-                    <form method="POST" action="{{ route('code-directory.update', $code_directory->id) }}">
-                        @csrf
-                        @method('PUT')
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="inputCode">Code</label>
-                                <input type="text" class="form-control" id="inputCode" name="code" placeholder="Enter Code" value="{{ $code_directory->code }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName">Name</label>
-                                <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Name" value="{{ $code_directory->name }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputTableName">Category Type</label>
-                                <input type="text" class="form-control" id="inputTableName" placeholder="Enter Category Type" value="{{ $code_directory->table_name_label }}" readonly>
-                                <input type="hidden" class="form-control" id="inputTableName" name="table_name" placeholder="Enter Category Type" value="{{ $code_directory->table_name }}" readonly>
-                            </div>
+                        <div class="form-group">
+                            <label for="inputName">Name</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="inputName"
+                                name="name" placeholder="Enter Name" value="{{ old('name', $code_directory->name) }}">
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <!-- /.card-body -->
+                        <div class="form-group">
+                            <label for="inputTableName">Category Type</label>
+                            <input type="text" class="form-control" id="inputTableName" placeholder="Enter Category Type"
+                                value="{{ $code_directory->table_name_label }}" readonly>
+                            <input type="hidden" class="form-control" id="inputTableName" name="table_name"
+                                placeholder="Enter Category Type" value="{{ $code_directory->table_name }}" readonly>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
 
-                        <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
-        </section>
+        </div>
+    </section>
     <!-- /.main-content -->
 @endsection
-

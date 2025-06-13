@@ -4,10 +4,12 @@ namespace App\Http\Controllers\CodeDirectory;
 
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
-use Illuminate\Validation\Rule;
+use App\Models\MaritalStatus;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
+use App\Http\Requests\CodeDirectory\StoreCodeDirectoryRequest;
+use App\Http\Requests\CodeDirectory\UpdateCodeDirectoryRequest;
 
 class CodeDirectoryController extends Controller
 {
@@ -56,26 +58,12 @@ class CodeDirectoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCodeDirectoryRequest $request)
     {
         try {
-            $request->validate([
-                'code' => ['required', 'string', 'max:255', 'unique:code_directories,code'],
-                'name' => ['required', 'string', 'max:255'],
-                'table_name' => ['required', 'string'],
-            ], [
-                'code.required' => 'Code is required.',
-                'code.string' => 'Code must be a string.',
-                'code.max' => 'Code must not be greater than 255 characters.',
-                'code.unique' => 'Code has already been taken.',
-                'name.required' => 'Name is required.',
-                'name.string' => 'Name must be a string.',
-                'name.max' => 'Name must not be greater than 255 characters.',
-                'table_name.required' => 'Table name is required.',
-                'table_name.string' => 'Table name must be a string.',
-            ]);
-
-            $table_name = $request->table_name;
+            // $table_name is coming in the lower case with underscore
+            // For ex: marital_statuses
+            $table_name = $request->input('table_name');
 
             // Use Schema facade to check for table existence
             if (!Schema::hasTable($table_name)) {
@@ -83,18 +71,20 @@ class CodeDirectoryController extends Controller
             }
 
             $data = [
-                'code' => $request->code,
-                'name' => $request->name,
-                'table_name' => $request->table_name,
+                'code' => $request->input('code'),
+                'name' => $request->input('name'),
+                'table_name' => $request->input('table_name'),
             ];
 
-            CodeDirectory::create($data);
+            $code_directory = CodeDirectory::create($data);
+
+            $this->storeOrUpdateOtherTables($code_directory, $request->input('name'), $table_name);
+
             return redirect()->route('code-directory.index')->with('success', 'Code directory created successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -119,48 +109,30 @@ class CodeDirectoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCodeDirectoryRequest $request, string $id)
     {
         try {
-            $request->validate([
-                'code' => [
-                    'required',
-                    'string',
-                    'max:255',
-                    Rule::unique('code_directories')->where(function ($query) use ($request) {
-                        return $query->where('table_name', $request->table_name);
-                    })->ignore($id),
-                ],
-                'name' => ['required', 'string', 'max:255'],
-                'table_name' => ['required', 'string'],
-            ], [
-                'code.required' => 'Code is required.',
-                'code.string' => 'Code must be a string.',
-                'code.max' => 'Code must not be greater than 255 characters.',
-                'code.unique' => 'This code and category combination has already been taken.',
-                'name.required' => 'Name is required.',
-                'name.string' => 'Name must be a string.',
-                'name.max' => 'Name must not be greater than 255 characters.',
-                'table_name.required' => 'Table name is required.',
-                'table_name.string' => 'Table name must be a string.',
-            ]);
-
-
-
             $code_directory = CodeDirectory::findOrFail($id);
 
-            $table_name = strtolower(str_replace(' ', '_', $request->table_name));
+            // Sanitization for table_name
+            // $request->input('table_name') is modifying in the lower case with underscore
+            // For ex: marital_statuses
+            $table_name = strtolower(str_replace(' ', '_', $request->input('table_name')));
+
             if ($code_directory->table_name != $table_name) {
                 throw new \Exception("The category $table_name does not exist.");
             }
 
             $data = [
-                'code' => $request->code,
-                'name' => $request->name,
-                'table_name' => $request->table_name,
+                'code' => $request->input('code'),
+                'name' => $request->input('name'),
+                'table_name' => $request->input('table_name'),
             ];
 
             $code_directory->update($data);
+
+            $this->storeOrUpdateOtherTables($code_directory, $request->input('name'), $table_name);
+
             return redirect()->route('code-directory.index')->with('success', 'Code directory updated successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
@@ -174,8 +146,21 @@ class CodeDirectoryController extends Controller
     {
         try {
             $code_directory = CodeDirectory::findOrFail($id);
-            $code_directory->deletse();
+            $code_directory->delete();
             return redirect()->route('code-directory.index')->with('success', 'Code directory deleted successfully.');
+        } catch (\Throwable $th) {
+            return view('errors.error', ['message' => $th->getMessage()]);
+        }
+    }
+
+    protected function storeOrUpdateOtherTables(CodeDirectory $code_directory, string $name, string $table_name) {
+        try {
+            if($table_name == 'marital_statuses') {
+                MaritalStatus::updateOrCreate(
+                    ['code_directory_id' => $code_directory->id],
+                    ['name' => $name]
+                );
+            }
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

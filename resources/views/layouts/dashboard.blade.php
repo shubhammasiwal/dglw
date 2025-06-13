@@ -137,25 +137,25 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Registered Workers</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="pages/layout/boxed.html" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Generate ID Card</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Add Family Member</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Add Benefit</p>
                                             </a>
@@ -179,13 +179,13 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                                <a href=#" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Report 1</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/charts/flot.html" class="nav-link">
+                                                <a href="#" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Report 2</p>
                                                 </a>
@@ -208,13 +208,13 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/UI/icons.html" class="nav-link">
+                                                <a href="{{ route('marital-status.index') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Districts</p>
+                                                    <p>Martital Status</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="pages/UI/buttons.html" class="nav-link">
+                                                <a href="#" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Categories</p>
                                                 </a>
