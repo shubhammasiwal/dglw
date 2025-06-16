@@ -9,6 +9,7 @@ use App\Http\Controllers\Worker\WorkerController;
 use App\Http\Controllers\Disability\DisabilityController;
 use App\Http\Controllers\WorkerType\WorkerTypeController;
 use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
+use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 use App\Http\Controllers\SocialCategory\SocialCategoryController;
 use App\Http\Controllers\WorkerRelationship\WorkerRelationshipController;
@@ -46,4 +47,5 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('worker-relationship', WorkerRelationshipController::class);
     Route::resource('worker-type', WorkerTypeController::class);
     Route::resource('disability', DisabilityController::class);
+    Route::resource('education', EducationController::class);
 });

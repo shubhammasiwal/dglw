@@ -243,6 +243,12 @@
                                                     <p>Disability</p>
                                                 </a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('education.index') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Education</p>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endunlessrole
