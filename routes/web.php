@@ -9,6 +9,7 @@ use App\Http\Controllers\Worker\WorkerController;
 use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
 use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 use App\Http\Controllers\SocialCategory\SocialCategoryController;
+use App\Http\Controllers\WorkerRelationship\WorkerRelationshipController;
 
 Auth::routes();
 
@@ -40,4 +41,5 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('marital-status', MaritalStatusController::class);
     Route::resource('social-category', SocialCategoryController::class);
     Route::resource('gender', GenderController::class);
+    Route::resource('worker-relationship', WorkerRelationshipController::class);
 });

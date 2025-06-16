@@ -19,12 +19,18 @@ return [
         'state' => 'State',
         'union_territory' => 'Union Territory',
     ],
-    'CODE_DIRECTORY_TABLE_NAMES' => ['marital_statuses','social_categories','genders'],
+    'CODE_DIRECTORY_TABLE_NAMES' => [
+        'marital_statuses',
+        'social_categories',
+        'genders',
+        'worker_relationships',
+    ],
 
     'CODE_DIRECTORY_MODEL_NAMES' => [
         'marital_statuses' => 'MaritalStatus',
         'social_categories' => 'SocialCategory',
         'genders' => 'Gender',
+        'worker_relationships' => 'WorkerRelationship',
     ],
 
 ];
