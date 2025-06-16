@@ -7,8 +7,8 @@ use App\Models\CodeDirectory;
 use App\Models\MaritalStatus;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
-use App\Http\Requests\UpdateMaritalStatusRequest;
 use App\Http\Requests\MaritalStatus\StoreMaritalStatusRequest;
+use App\Http\Requests\MaritalStatus\UpdateMaritalStatusRequest;
 
 class MaritalStatusController extends Controller
 {
