@@ -16,7 +16,7 @@ class GenderController extends Controller
      * Initialize a new GenderController instance.
      * 
      * Sets the table name and human-readable table name label
-     * for the social category using the Gender model.
+     * for the gender using the Gender model.
      */
 
     public function __construct()

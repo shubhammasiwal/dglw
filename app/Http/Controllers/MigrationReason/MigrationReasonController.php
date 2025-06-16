@@ -16,7 +16,7 @@ class MigrationReasonController extends Controller
      * Initialize a new MigrationReasonController instance.
      * 
      * Sets the table name and human-readable table name label
-     * for the social category using the MigrationReason model.
+     * for the MigrationReasonController using the MigrationReason model.
      */
 
     public function __construct()

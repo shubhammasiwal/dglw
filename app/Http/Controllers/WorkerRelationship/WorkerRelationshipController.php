@@ -16,7 +16,7 @@ class WorkerRelationshipController extends Controller
      * Initialize a new WorkerRelationshipController instance.
      * 
      * Sets the table name and human-readable table name label
-     * for the social category using the WorkerRelationship model.
+     * for the worker relationship using the WorkerRelationship model.
      */
 
     public function __construct()

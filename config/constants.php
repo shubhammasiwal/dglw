@@ -28,6 +28,7 @@ return [
         'disabilities',
         'education',
         'migration_reasons',
+        'address_types',
 
     ],
 
@@ -40,6 +41,7 @@ return [
         'disabilities' => 'Disability',
         'education' => 'Education',
         'migration_reasons' => 'MigrationReason',
+        'address_types' => 'AddressType',
     ],
 
 ];

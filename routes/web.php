@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Gender\GenderController;
 use App\Http\Controllers\Worker\WorkerController;
+use App\Http\Controllers\Address\AddressTypeController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\Disability\DisabilityController;
 use App\Http\Controllers\WorkerType\WorkerTypeController;
@@ -50,4 +51,5 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('disability', DisabilityController::class);
     Route::resource('education', EducationController::class);
     Route::resource('migration-reason', MigrationReasonController::class);
+    Route::resource('address-type', AddressTypeController::class);
 });

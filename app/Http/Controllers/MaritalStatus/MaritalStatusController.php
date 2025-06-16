@@ -15,6 +15,12 @@ class MaritalStatusController extends Controller
     private $table_name;
     private $table_name_label;
 
+    /**
+     * Initialize a new MaritalStatusController instance.
+     * 
+     * Sets the table name and human-readable table name label
+     * for the MaritalStatusController using the MaritalStatus model.
+     */
     public function __construct()
     {
         $this->table_name = (new MaritalStatus())->getTable();

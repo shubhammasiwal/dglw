@@ -16,7 +16,7 @@ class EducationController extends Controller
      * Initialize a new EducationController instance.
      * 
      * Sets the table name and human-readable table name label
-     * for the social category using the Education model.
+     * for the education using the Education model.
      */
 
     public function __construct()

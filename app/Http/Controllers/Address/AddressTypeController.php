@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Disability;
+namespace App\Http\Controllers\Address;
 
-use App\Models\Disability;
+use App\Models\AddressType;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
 
-class DisabilityController extends Controller
+class AddressTypeController extends Controller
 {
     private $table_name;
     private $table_name_label;
 
     /**
-     * Initialize a new instance of DisabilityController.
-     * 
-     * This constructor sets the table name and a user-friendly label
-     * for the Disability model.
+     * Initialize a new AddressTypeController instance.
+     *
+     * Sets the table name and human-readable table name label
+     * for the AddressType using the AddressType model.
      */
 
     public function __construct()
     {
-        $this->table_name = (new Disability())->getTable();
+        $this->table_name = (new AddressType())->getTable();
         $this->table_name_label = ucwords(str_replace('_', ' ', $this->table_name));
     }
 
@@ -30,12 +30,12 @@ class DisabilityController extends Controller
      */
     public function index()
     {
-        $disabilities = Disability::orderByDesc('created_at')->with('codeDirectory')->get();
-        $disabilities->transform(function ($item) {
+        $address_types = AddressType::orderByDesc('created_at')->with('codeDirectory')->get();
+        $address_types->transform(function ($item) {
             $item->table_name_label = $this->table_name_label;
             return $item;
         });
-        return view('pages.Disability.index', compact('disabilities'));
+        return view('pages.AddressType.index', compact('address_types'));
     }
 
     /**
@@ -43,7 +43,7 @@ class DisabilityController extends Controller
      */
     public function create()
     {
-        return view('pages.Disability.create', ['table_name' => $this->table_name]);
+        return view('pages.AddressType.create', ['table_name' => $this->table_name]);
     }
 
     /**
@@ -60,12 +60,12 @@ class DisabilityController extends Controller
             
             $code_directory = CodeDirectory::create($data);
 
-            Disability::create([
+            AddressType::create([
                 'name' => $data['name'],
                 'code_directory_id' => $code_directory->id
             ]);
 
-            return redirect()->route('disability.index')->with('success', 'Disability created successfully.');
+            return redirect()->route('address-type.index')->with('success', 'Address type created successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -76,9 +76,9 @@ class DisabilityController extends Controller
      */
     public function show(string $id)
     {
-        $disability = Disability::with('codeDirectory')->findOrFail($id);
-        $disability->_label = $this->table_name_label;
-        return view('pages.Disability.show', compact('disability'));
+        $address_type = AddressType::with('codeDirectory')->findOrFail($id);
+        $address_type->_label = $this->table_name_label;
+        return view('pages.AddressType.show', compact('address_type'));
     }
 
     /**
@@ -86,10 +86,10 @@ class DisabilityController extends Controller
      */
     public function edit(string $id)
     {
-        $disability = Disability::with('codeDirectory')->findOrFail($id);
-        $disability->table_name_label = $this->table_name;
-        return view('pages.Disability.edit', [
-            'disability' => $disability,
+        $address_type = AddressType::with('codeDirectory')->findOrFail($id);
+        $address_type->table_name_label = $this->table_name;
+        return view('pages.AddressType.edit', [
+            'address_type' => $address_type,
             'table_name' => $this->table_name
         ]);
     }
@@ -100,7 +100,7 @@ class DisabilityController extends Controller
     public function update(Request $request, string $id)
     {
         try {
-            $disability = Disability::findOrFail($id);
+            $address_type = AddressType::findOrFail($id);
 
             $data = [
                 'code' => $request->input('code'),
@@ -108,14 +108,14 @@ class DisabilityController extends Controller
                 'table_name' => $request->input('table_name'),
             ];
 
-            $code_directory = $disability->codeDirectory;
+            $code_directory = $address_type->codeDirectory;
             $code_directory->update($data);
 
-            $disability->update([
+            $address_type->update([
                 'name' => $data['name'],
             ]);
 
-            return redirect()->route('disability.index')->with('success', 'Disability updated successfully.');
+            return redirect()->route('address-type.index')->with('success', 'Address type updated successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -127,10 +127,10 @@ class DisabilityController extends Controller
     public function destroy(string $id)
     {
         try {
-            $disability = Disability::findOrFail($id);
-            $disability->codeDirectory()->delete();
-            $disability->delete();
-            return redirect()->route('disability.index')->with('success', 'Disability deleted successfully.');
+            $address_type = AddressType::findOrFail($id);
+            $address_type->codeDirectory()->delete();
+            $address_type->delete();
+            return redirect()->route('address-type.index')->with('success', 'Address type deleted successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

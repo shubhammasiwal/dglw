@@ -16,7 +16,7 @@ class WorkerTypeController extends Controller
      * Initialize a new WorkerTypeController instance.
      * 
      * Sets the table name and human-readable table name label
-     * for the social category using the WorkerType model.
+     * for the worker type using the WorkerType model.
      */
 
     public function __construct()
