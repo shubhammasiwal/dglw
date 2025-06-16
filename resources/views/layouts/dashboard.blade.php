@@ -214,9 +214,15 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="{{ route('social-category.index') }}" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Categories</p>
+                                                    <p>Social Category</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('gender.index') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Gender</p>
                                                 </a>
                                             </li>
                                         </ul>

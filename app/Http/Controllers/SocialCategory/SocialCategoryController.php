@@ -1,23 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\MaritalStatus;
+namespace App\Http\Controllers\SocialCategory;
 
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
-use App\Models\MaritalStatus;
+use App\Models\SocialCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Schema;
-use App\Http\Requests\MaritalStatus\StoreMaritalStatusRequest;
-use App\Http\Requests\MaritalStatus\UpdateMaritalStatusRequest;
+use App\Http\Requests\SocialCategory\StoreSocialCategoryRequest;
+use App\Http\Requests\SocialCategory\UpdateSocialCategoryRequest;
 
-class MaritalStatusController extends Controller
+class SocialCategoryController extends Controller
 {
     private $table_name;
     private $table_name_label;
 
+    /**
+     * Initialize a new SocialCategoryController instance.
+     * 
+     * Sets the table name and human-readable table name label
+     * for the social category using the SocialCategory model.
+     */
+
     public function __construct()
     {
-        $this->table_name = (new MaritalStatus())->getTable();
+        $this->table_name = (new SocialCategory())->getTable();
         $this->table_name_label = ucwords(str_replace('_', ' ', $this->table_name));
     }
 
@@ -26,13 +32,12 @@ class MaritalStatusController extends Controller
      */
     public function index()
     {
-        $marital_statuses = MaritalStatus::orderByDesc('created_at')->with('codeDirectory')->get();
-        $marital_statuses->transform(function ($item) {
+        $social_categories = SocialCategory::orderByDesc('created_at')->with('codeDirectory')->get();
+        $social_categories->transform(function ($item) {
             $item->table_name_label = $this->table_name_label;
             return $item;
         });
-
-        return view('pages.MaritalStatus.index', compact('marital_statuses'));
+        return view('pages.SocialCategory.index', compact('social_categories'));
     }
 
     /**
@@ -40,13 +45,13 @@ class MaritalStatusController extends Controller
      */
     public function create()
     {
-        return view('pages.MaritalStatus.create', ['table_name' => $this->table_name]);
+        return view('pages.SocialCategory.create', ['table_name' => $this->table_name]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMaritalStatusRequest $request)
+    public function store(StoreSocialCategoryRequest $request)
     {
         try {
             $data = [
@@ -57,12 +62,12 @@ class MaritalStatusController extends Controller
             
             $code_directory = CodeDirectory::create($data);
 
-            MaritalStatus::create([
+            SocialCategory::create([
                 'name' => $data['name'],
                 'code_directory_id' => $code_directory->id
             ]);
 
-            return redirect()->route('marital-status.index')->with('success', 'Marital status created successfully.');
+            return redirect()->route('social-category.index')->with('success', 'Social category created successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -73,9 +78,9 @@ class MaritalStatusController extends Controller
      */
     public function show(string $id)
     {
-        $marital_status = MaritalStatus::with('codeDirectory')->findOrFail($id);
-        $marital_status->_label = $this->table_name_label;
-        return view('pages.MaritalStatus.show', compact('marital_status'));
+        $social_category = SocialCategory::with('codeDirectory')->findOrFail($id);
+        $social_category->_label = $this->table_name_label;
+        return view('pages.SocialCategory.show', compact('social_category'));
     }
 
     /**
@@ -83,10 +88,10 @@ class MaritalStatusController extends Controller
      */
     public function edit(string $id)
     {
-        $marital_status = MaritalStatus::with('codeDirectory')->findOrFail($id);
-        $marital_status->table_name_label = $this->table_name;
-        return view('pages.MaritalStatus.edit', [
-            'marital_status' => $marital_status,
+        $social_category = SocialCategory::with('codeDirectory')->findOrFail($id);
+        $social_category->table_name_label = $this->table_name;
+        return view('pages.SocialCategory.edit', [
+            'social_category' => $social_category,
             'table_name' => $this->table_name
         ]);
     }
@@ -94,10 +99,10 @@ class MaritalStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMaritalStatusRequest $request, string $id)
+    public function update(UpdateSocialCategoryRequest $request, string $id)
     {
         try {
-            $marital_status = MaritalStatus::findOrFail($id);
+            $social_category = SocialCategory::findOrFail($id);
 
             $data = [
                 'code' => $request->input('code'),
@@ -105,14 +110,14 @@ class MaritalStatusController extends Controller
                 'table_name' => $request->input('table_name'),
             ];
 
-            $code_directory = $marital_status->codeDirectory;
+            $code_directory = $social_category->codeDirectory;
             $code_directory->update($data);
 
-            $marital_status->update([
+            $social_category->update([
                 'name' => $data['name'],
             ]);
 
-            return redirect()->route('marital-status.index')->with('success', 'Marital status updated successfully.');
+            return redirect()->route('social-category.index')->with('success', 'Social category updated successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -124,10 +129,10 @@ class MaritalStatusController extends Controller
     public function destroy(string $id)
     {
         try {
-            $marital_status = MaritalStatus::findOrFail($id);
-            $marital_status->codeDirectory()->delete();
-            $marital_status->delete();
-            return redirect()->route('marital-status.index')->with('success', 'Marital status deleted successfully.');
+            $social_category = SocialCategory::findOrFail($id);
+            $social_category->codeDirectory()->delete();
+            $social_category->delete();
+            return redirect()->route('social-category.index')->with('success', 'Social category deleted successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

@@ -1,23 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\MaritalStatus;
+namespace App\Http\Controllers\Gender;
 
+use App\Models\Gender;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
-use App\Models\MaritalStatus;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Schema;
-use App\Http\Requests\MaritalStatus\StoreMaritalStatusRequest;
-use App\Http\Requests\MaritalStatus\UpdateMaritalStatusRequest;
 
-class MaritalStatusController extends Controller
+class GenderController extends Controller
 {
     private $table_name;
     private $table_name_label;
 
+    /**
+     * Initialize a new GenderController instance.
+     * 
+     * Sets the table name and human-readable table name label
+     * for the social category using the Gender model.
+     */
+
     public function __construct()
     {
-        $this->table_name = (new MaritalStatus())->getTable();
+        $this->table_name = (new Gender())->getTable();
         $this->table_name_label = ucwords(str_replace('_', ' ', $this->table_name));
     }
 
@@ -26,13 +30,12 @@ class MaritalStatusController extends Controller
      */
     public function index()
     {
-        $marital_statuses = MaritalStatus::orderByDesc('created_at')->with('codeDirectory')->get();
-        $marital_statuses->transform(function ($item) {
+        $genders = Gender::orderByDesc('created_at')->with('codeDirectory')->get();
+        $genders->transform(function ($item) {
             $item->table_name_label = $this->table_name_label;
             return $item;
         });
-
-        return view('pages.MaritalStatus.index', compact('marital_statuses'));
+        return view('pages.Gender.index', compact('genders'));
     }
 
     /**
@@ -40,13 +43,13 @@ class MaritalStatusController extends Controller
      */
     public function create()
     {
-        return view('pages.MaritalStatus.create', ['table_name' => $this->table_name]);
+        return view('pages.Gender.create', ['table_name' => $this->table_name]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMaritalStatusRequest $request)
+    public function store(Request $request)
     {
         try {
             $data = [
@@ -57,12 +60,12 @@ class MaritalStatusController extends Controller
             
             $code_directory = CodeDirectory::create($data);
 
-            MaritalStatus::create([
+            Gender::create([
                 'name' => $data['name'],
                 'code_directory_id' => $code_directory->id
             ]);
 
-            return redirect()->route('marital-status.index')->with('success', 'Marital status created successfully.');
+            return redirect()->route('gender.index')->with('success', 'Gender created successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -73,9 +76,9 @@ class MaritalStatusController extends Controller
      */
     public function show(string $id)
     {
-        $marital_status = MaritalStatus::with('codeDirectory')->findOrFail($id);
-        $marital_status->_label = $this->table_name_label;
-        return view('pages.MaritalStatus.show', compact('marital_status'));
+        $gender = Gender::with('codeDirectory')->findOrFail($id);
+        $gender->_label = $this->table_name_label;
+        return view('pages.Gender.show', compact('gender'));
     }
 
     /**
@@ -83,10 +86,10 @@ class MaritalStatusController extends Controller
      */
     public function edit(string $id)
     {
-        $marital_status = MaritalStatus::with('codeDirectory')->findOrFail($id);
-        $marital_status->table_name_label = $this->table_name;
-        return view('pages.MaritalStatus.edit', [
-            'marital_status' => $marital_status,
+        $gender = Gender::with('codeDirectory')->findOrFail($id);
+        $gender->table_name_label = $this->table_name;
+        return view('pages.Gender.edit', [
+            'gender' => $gender,
             'table_name' => $this->table_name
         ]);
     }
@@ -94,10 +97,10 @@ class MaritalStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMaritalStatusRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         try {
-            $marital_status = MaritalStatus::findOrFail($id);
+            $gender = Gender::findOrFail($id);
 
             $data = [
                 'code' => $request->input('code'),
@@ -105,14 +108,14 @@ class MaritalStatusController extends Controller
                 'table_name' => $request->input('table_name'),
             ];
 
-            $code_directory = $marital_status->codeDirectory;
+            $code_directory = $gender->codeDirectory;
             $code_directory->update($data);
 
-            $marital_status->update([
+            $gender->update([
                 'name' => $data['name'],
             ]);
 
-            return redirect()->route('marital-status.index')->with('success', 'Marital status updated successfully.');
+            return redirect()->route('gender.index')->with('success', 'Gender updated successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -124,10 +127,10 @@ class MaritalStatusController extends Controller
     public function destroy(string $id)
     {
         try {
-            $marital_status = MaritalStatus::findOrFail($id);
-            $marital_status->codeDirectory()->delete();
-            $marital_status->delete();
-            return redirect()->route('marital-status.index')->with('success', 'Marital status deleted successfully.');
+            $gender = Gender::findOrFail($id);
+            $gender->codeDirectory()->delete();
+            $gender->delete();
+            return redirect()->route('gender.index')->with('success', 'Gender deleted successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

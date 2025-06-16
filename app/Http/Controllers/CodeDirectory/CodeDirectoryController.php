@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Models\MaritalStatus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Requests\CodeDirectory\StoreCodeDirectoryRequest;
@@ -13,6 +14,12 @@ use App\Http\Requests\CodeDirectory\UpdateCodeDirectoryRequest;
 
 class CodeDirectoryController extends Controller
 {
+    private $table_names =[];
+
+    public function __construct() {
+        $this->table_names = config('constants.CODE_DIRECTORY_TABLE_NAMES');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -33,12 +40,10 @@ class CodeDirectoryController extends Controller
     public function create()
     {
         try {
-            // Send all the table name related to code directory
-            $table_names = ['marital_statuses'];
-            $placeholders = implode(',', array_fill(0, count($table_names), '?'));
+            $placeholders = implode(',', array_fill(0, count($this->table_names), '?'));
 
             $query = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE' AND table_name IN ($placeholders)";
-            $tables = DB::select($query, $table_names);
+            $tables = DB::select($query, $this->table_names);
             $tables = array_column($tables, 'table_name');
             $tables = array_combine(
                 array_map(function ($table) {
@@ -77,9 +82,10 @@ class CodeDirectoryController extends Controller
             ];
 
             $code_directory = CodeDirectory::create($data);
+            // dd($code_directory);
 
             $this->storeOrUpdateOtherTables($code_directory, $request->input('name'), $table_name);
-
+            
             return redirect()->route('code-directory.index')->with('success', 'Code directory created successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
@@ -154,9 +160,13 @@ class CodeDirectoryController extends Controller
     }
 
     protected function storeOrUpdateOtherTables(CodeDirectory $code_directory, string $name, string $table_name) {
+        // dd($code_directory, $name, $table_name);
+        // dd('storeOrUpdateOtherTables');
         try {
-            if($table_name == 'marital_statuses') {
-                MaritalStatus::updateOrCreate(
+            $constants = config('constants');
+            if(in_array($table_name, $constants['CODE_DIRECTORY_TABLE_NAMES'])) {
+                $model_name = 'App\Models\\' . $constants['CODE_DIRECTORY_MODEL_NAMES'][$table_name];
+                $entry = $model_name::updateOrCreate(
                     ['code_directory_id' => $code_directory->id],
                     ['name' => $name]
                 );
