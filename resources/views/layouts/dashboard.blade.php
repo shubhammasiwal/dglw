@@ -237,6 +237,12 @@
                                                     <p>Worker Type</p>
                                                 </a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('disability.index') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Disability</p>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endunlessrole

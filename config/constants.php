@@ -25,6 +25,7 @@ return [
         'genders',
         'worker_relationships',
         'worker_types',
+        'disabilities',
     ],
 
     'CODE_DIRECTORY_MODEL_NAMES' => [
@@ -33,6 +34,7 @@ return [
         'genders' => 'Gender',
         'worker_relationships' => 'WorkerRelationship',
         'worker_types' => 'WorkerType',
+        'disabilities' => 'Disability',
     ],
 
 ];
