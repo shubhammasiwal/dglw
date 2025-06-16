@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Gender\GenderController;
 use App\Http\Controllers\Worker\WorkerController;
+use App\Http\Controllers\WorkerType\WorkerTypeController;
 use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
 use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 use App\Http\Controllers\SocialCategory\SocialCategoryController;
@@ -42,4 +43,5 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('social-category', SocialCategoryController::class);
     Route::resource('gender', GenderController::class);
     Route::resource('worker-relationship', WorkerRelationshipController::class);
+    Route::resource('worker-type', WorkerTypeController::class);
 });

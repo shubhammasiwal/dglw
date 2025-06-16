@@ -231,6 +231,12 @@
                                                     <p>Worker Relationship</p>
                                                 </a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a href="{{ route('worker-type.index') }}" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Worker Type</p>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endunlessrole

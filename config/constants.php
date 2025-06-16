@@ -24,6 +24,7 @@ return [
         'social_categories',
         'genders',
         'worker_relationships',
+        'worker_types',
     ],
 
     'CODE_DIRECTORY_MODEL_NAMES' => [
@@ -31,6 +32,7 @@ return [
         'social_categories' => 'SocialCategory',
         'genders' => 'Gender',
         'worker_relationships' => 'WorkerRelationship',
+        'worker_types' => 'WorkerType',
     ],
 
 ];
