@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Gender\GenderController;
 use App\Http\Controllers\Worker\WorkerController;
+use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\Disability\DisabilityController;
 use App\Http\Controllers\WorkerType\WorkerTypeController;
 use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
-use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 use App\Http\Controllers\SocialCategory\SocialCategoryController;
+use App\Http\Controllers\MigrationReason\MigrationReasonController;
 use App\Http\Controllers\WorkerRelationship\WorkerRelationshipController;
 
 Auth::routes();
@@ -48,4 +49,5 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('worker-type', WorkerTypeController::class);
     Route::resource('disability', DisabilityController::class);
     Route::resource('education', EducationController::class);
+    Route::resource('migration-reason', MigrationReasonController::class);
 });
