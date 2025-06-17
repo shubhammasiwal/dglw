@@ -4,8 +4,10 @@ use App\Models\SocialCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LGD\LGDStateController;
 use App\Http\Controllers\Gender\GenderController;
 use App\Http\Controllers\Worker\WorkerController;
+use App\Http\Controllers\LGD\LGDDistrictController;
 use App\Http\Controllers\Address\AddressTypeController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\Disability\DisabilityController;
@@ -15,6 +17,7 @@ use App\Http\Controllers\MaritalStatus\MaritalStatusController;
 use App\Http\Controllers\SocialCategory\SocialCategoryController;
 use App\Http\Controllers\MigrationReason\MigrationReasonController;
 use App\Http\Controllers\WorkerRelationship\WorkerRelationshipController;
+
 
 Auth::routes();
 
@@ -52,4 +55,8 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     Route::resource('education', EducationController::class);
     Route::resource('migration-reason', MigrationReasonController::class);
     Route::resource('address-type', AddressTypeController::class);
+
+    // LGD Code
+    Route::get('l-g-d-state', [LGDStateController::class, 'index'])->name('l-g-d-state.index');
+    Route::get('l-g-d-district', [LGDDistrictController::class, 'index'])->name('l-g-d-district.index');
 });

@@ -56,6 +56,9 @@ class DatabaseSeeder extends Seeder
             ]);
             $data_operator->assignRole('data_operator');
 
+            $this->call(LGDStateSeeder::class);
+            $this->call(LGDDistrictSeeder::class);
+
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();
