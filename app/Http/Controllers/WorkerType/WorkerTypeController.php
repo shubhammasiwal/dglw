@@ -6,6 +6,8 @@ use App\Models\WorkerType;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WorkerType\StoreWorkerTypeRequest;
+use App\Http\Requests\WorkerType\UpdateWorkerTypeRequest;
 
 class WorkerTypeController extends Controller
 {
@@ -49,7 +51,7 @@ class WorkerTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreWorkerTypeRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class WorkerTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateWorkerTypeRequest $request, string $id)
     {
         try {
             $worker_type = WorkerType::findOrFail($id);

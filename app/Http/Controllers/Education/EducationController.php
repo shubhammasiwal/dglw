@@ -6,6 +6,8 @@ use App\Models\Education;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Education\StoreEducationRequest;
+use App\Http\Requests\Education\UpdateEducationRequest;
 
 class EducationController extends Controller
 {
@@ -49,7 +51,7 @@ class EducationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEducationRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class EducationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateEducationRequest $request, string $id)
     {
         try {
             $education = Education::findOrFail($id);

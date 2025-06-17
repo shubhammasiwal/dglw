@@ -6,6 +6,8 @@ use App\Models\Disability;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Disability\StoreDisabilityRequest;
+use App\Http\Requests\Disability\UpdateDisabilityRequest;
 
 class DisabilityController extends Controller
 {
@@ -49,7 +51,7 @@ class DisabilityController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreDisabilityRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class DisabilityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateDisabilityRequest $request, string $id)
     {
         try {
             $disability = Disability::findOrFail($id);

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Models\WorkerRelationship;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\WorkerRelationship\StoreWorkerRelationshipRequest;
+use App\Http\Requests\WorkerRelationship\UpdateWorkerRelationshipRequest;
 
 class WorkerRelationshipController extends Controller
 {
@@ -49,7 +51,7 @@ class WorkerRelationshipController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreWorkerRelationshipRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class WorkerRelationshipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateWorkerRelationshipRequest $request, string $id)
     {
         try {
             $worker_relationship = WorkerRelationship::findOrFail($id);

@@ -6,6 +6,8 @@ use App\Models\AddressType;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddressType\StoreAddressTypeRequest;
+use App\Http\Requests\AddressType\UpdateAddressTypeRequest;
 
 class AddressTypeController extends Controller
 {
@@ -49,7 +51,7 @@ class AddressTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAddressTypeRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class AddressTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAddressTypeRequest $request, string $id)
     {
         try {
             $address_type = AddressType::findOrFail($id);

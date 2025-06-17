@@ -6,6 +6,8 @@ use App\Models\Gender;
 use Illuminate\Http\Request;
 use App\Models\CodeDirectory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Gender\StoreGenderRequest;
+use App\Http\Requests\Gender\UpdateGenderRequest;
 
 class GenderController extends Controller
 {
@@ -49,7 +51,7 @@ class GenderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreGenderRequest $request)
     {
         try {
             $data = [
@@ -97,7 +99,7 @@ class GenderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateGenderRequest $request, string $id)
     {
         try {
             $gender = Gender::findOrFail($id);
