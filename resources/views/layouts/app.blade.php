@@ -19,10 +19,16 @@
                     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
                         <span class="fs-4">{{ env('APP_NAME') }}</span>
                     </a>
-                    <nav class="d-inline-flex ms-auto">
-                        <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('login') }}">Login</a>
-                        <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('register') }}">Sign Up</a>
-                    </nav>
+                    @auth
+                        <nav class="d-inline-flex ms-auto">
+                            <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('dashboard') }}">Dashboard</a>
+                        </nav>
+                    @else
+                        <nav class="d-inline-flex ms-auto">
+                            <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('login') }}">Login</a>
+                            <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('register') }}">Sign Up</a>
+                        </nav>
+                    @endauth
                 </div>
             </header>
 

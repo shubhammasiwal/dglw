@@ -116,13 +116,17 @@
                                 data-accordion="false">
                                 <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                                 <li class="nav-item">
-                                    <a href="{{ route('dashboard') }}" class="nav-link">
+                                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-home"></i>
                                         <p>Dashboard</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                {{-- Check for active menu for Worker --}}
+                                @php
+                                    $worker_active = request()->routeIs('register-worker');
+                                @endphp
+                                <li class="nav-item {{ $worker_active ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $worker_active ? 'active' : '' }}">
                                         <i class="nav-icon fas fa-th"></i>
                                         <p>
                                             Worker's Menu
@@ -131,7 +135,7 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{{ route('register-worker') }}" class="nav-link">
+                                            <a href="{{ route('register-worker') }}" class="nav-link {{ request()->routeIs('register-worker') ? 'active' : '' }}">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Register Worker</p>
                                             </a>
@@ -161,7 +165,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>View Benefits</p>
                                             </a>
@@ -192,8 +196,12 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                    {{-- Check for active menu for Directory Code --}}
+                                    @php
+                                        $directory_code_active = request()->routeIs('code-directory.index') || request()->routeIs('marital-status.index') || request()->routeIs('social-category.index') || request()->routeIs('gender.index') || request()->routeIs('worker-relationship.index') || request()->routeIs('worker-type.index') || request()->routeIs('disability.index') || request()->routeIs('education.index') || request()->routeIs('migration-reason.index') || request()->routeIs('address-type.index');
+                                    @endphp
+                                    <li class="nav-item {{ $directory_code_active ? 'menu-open' : '' }}">
+                                        <a href="#" class="nav-link {{ $directory_code_active ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-folder-open"></i>
                                             <p>
                                                 Directory Code
@@ -202,69 +210,73 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="{{ route('code-directory.index') }}" class="nav-link">
+                                                <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>All Codes</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('marital-status.index') }}" class="nav-link">
+                                                <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
-                                                    <p>Martital Status</p>
+                                                    <p>Marital Status</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('social-category.index') }}" class="nav-link">
+                                                <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Social Category</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('gender.index') }}" class="nav-link">
+                                                <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Gender</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('worker-relationship.index') }}" class="nav-link">
+                                                <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Worker Relationship</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('worker-type.index') }}" class="nav-link">
+                                                <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Worker Type</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('disability.index') }}" class="nav-link">
+                                                <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Disability</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('education.index') }}" class="nav-link">
+                                                <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Education</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('migration-reason.index') }}" class="nav-link">
+                                                <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Migration Reason</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('address-type.index') }}" class="nav-link">
+                                                <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Address Type</p>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
+                                    {{-- Check for active menu for LGD Code --}}
+                                    @php
+                                        $lgd_code_active = request()->routeIs('l-g-d-state.index') || request()->routeIs('l-g-d-district.index');
+                                    @endphp
+                                    <li class="nav-item {{ $lgd_code_active ? 'menu-open' : '' }}">
+                                        <a href="#" class="nav-link {{ $lgd_code_active ? 'active' : '' }}">
                                             <i class="nav-icon fas fa-folder-open"></i>
                                             <p>
                                                 LGD Code
@@ -273,13 +285,13 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="{{ route('l-g-d-state.index') }}" class="nav-link">
+                                                <a href="{{ route('l-g-d-state.index') }}" class="nav-link {{ request()->routeIs('l-g-d-state.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>LGD State</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('l-g-d-district.index') }}" class="nav-link">
+                                                <a href="{{ route('l-g-d-district.index') }}" class="nav-link {{ request()->routeIs('l-g-d-district.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>LGD DIstrict</p>
                                                 </a>
