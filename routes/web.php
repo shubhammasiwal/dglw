@@ -4,6 +4,7 @@ use App\Models\SocialCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\LGD\LGDStateController;
 use App\Http\Controllers\Gender\GenderController;
 use App\Http\Controllers\Worker\WorkerController;
@@ -59,4 +60,8 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
     // LGD Code
     Route::get('l-g-d-state', [LGDStateController::class, 'index'])->name('l-g-d-state.index');
     Route::get('l-g-d-district', [LGDDistrictController::class, 'index'])->name('l-g-d-district.index');
+
+    // User Route
+    Route::resource('users', UserController::class);
 });
+

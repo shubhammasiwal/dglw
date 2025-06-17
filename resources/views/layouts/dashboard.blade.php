@@ -121,6 +121,7 @@
                                         <p>Dashboard</p>
                                     </a>
                                 </li>
+
                                 {{-- Check for active menu for Worker --}}
                                 @php
                                     $worker_active = request()->routeIs('register-worker');
@@ -196,9 +197,10 @@
                                             </li>
                                         </ul>
                                     </li>
+
                                     {{-- Check for active menu for Directory Code --}}
                                     @php
-                                        $directory_code_active = request()->routeIs('code-directory.index') || request()->routeIs('marital-status.index') || request()->routeIs('social-category.index') || request()->routeIs('gender.index') || request()->routeIs('worker-relationship.index') || request()->routeIs('worker-type.index') || request()->routeIs('disability.index') || request()->routeIs('education.index') || request()->routeIs('migration-reason.index') || request()->routeIs('address-type.index');
+                                        $directory_code_active = request()->routeIs('code-directory.*') || request()->routeIs('marital-status.*') || request()->routeIs('social-category.*') || request()->routeIs('gender.*') || request()->routeIs('worker-relationship.*') || request()->routeIs('worker-type.*') || request()->routeIs('disability.*') || request()->routeIs('education.*') || request()->routeIs('migration-reason.*') || request()->routeIs('address-type.*');
                                     @endphp
                                     <li class="nav-item {{ $directory_code_active ? 'menu-open' : '' }}">
                                         <a href="#" class="nav-link {{ $directory_code_active ? 'active' : '' }}">
@@ -210,67 +212,68 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.index') ? 'active' : '' }}">
+                                                <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>All Codes</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.index') ? 'active' : '' }}">
+                                                <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Marital Status</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.index') ? 'active' : '' }}">
+                                                <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Social Category</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.index') ? 'active' : '' }}">
+                                                <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Gender</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.index') ? 'active' : '' }}">
+                                                <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Worker Relationship</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.index') ? 'active' : '' }}">
+                                                <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Worker Type</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.index') ? 'active' : '' }}">
+                                                <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Disability</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.index') ? 'active' : '' }}">
+                                                <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Education</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.index') ? 'active' : '' }}">
+                                                <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Migration Reason</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.index') ? 'active' : '' }}">
+                                                <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.*') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Address Type</p>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
+
                                     {{-- Check for active menu for LGD Code --}}
                                     @php
                                         $lgd_code_active = request()->routeIs('l-g-d-state.index') || request()->routeIs('l-g-d-district.index');
@@ -294,6 +297,28 @@
                                                 <a href="{{ route('l-g-d-district.index') }}" class="nav-link {{ request()->routeIs('l-g-d-district.index') ? 'active' : '' }}">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>LGD DIstrict</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    {{-- Check for active menu for Users --}}
+                                    @php
+                                        $user_active = request()->routeIs('users.index');
+                                    @endphp
+                                    <li class="nav-item {{ $user_active ? 'menu-open' : '' }}">
+                                        <a href="#" class="nav-link {{ $user_active ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-folder-open"></i>
+                                            <p>
+                                                Users
+                                                <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Users</p>
                                                 </a>
                                             </li>
                                         </ul>

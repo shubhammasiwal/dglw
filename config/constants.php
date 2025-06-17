@@ -7,6 +7,12 @@ return [
         'WELFARE_COMMISSIONER' => 'welfare_commissioner',
         'DATA_OPERATOR' => 'data_operator',
     ],
+    'ROLES_LABEL' => [
+        'PORTAL_ADMIN' => 'Portal Admin',
+        'ADMIN' => 'Admin',
+        'WELFARE_COMMISSIONER' => 'Welfare Commissioner',
+        'DATA_OPERATOR' => 'Data Operator',
+    ],
     'LGD_STATE_TYPES' => [
         'STATE' => 'state',
         'UNION_TERRITORY' => 'union_territory',
