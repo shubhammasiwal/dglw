@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\LGDDistrict;
+use App\Models\LGDState;
 use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,6 +15,9 @@ class LGDDistrictSeeder extends Seeder
      */
     public function run(): void
     {
+        // Truncate the table before inserting
+        LGDDistrict::truncate();
+
         $path = storage_path('app/private/lgd_districts.xlsx');
         $rows = Excel::toArray([], $path)[0];
 

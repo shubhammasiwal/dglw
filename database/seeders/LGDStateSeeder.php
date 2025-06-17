@@ -14,7 +14,10 @@ class LGDStateSeeder extends Seeder
      */
     public function run(): void
     {
-         $path = storage_path('app/private/lgd_states.xlsx');
+        // Truncate the table before inserting
+        LGDState::truncate();
+        
+        $path = storage_path('app/private/lgd_states.xlsx');
         $rows = Excel::toArray([], $path)[0];
 
         // Skip header row, start from 1 if first row is header
