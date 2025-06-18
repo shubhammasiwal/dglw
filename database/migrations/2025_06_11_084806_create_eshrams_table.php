@@ -16,7 +16,8 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('uan')->unique();
-            $table->json('json_data_after_otp')->nullable();
+            $table->boolean('took_consent')->nullable();
+            $table->json('json_data_after_requesting_otp')->nullable();
             $table->json('json_data_after_validating_otp_encrypted')->nullable();
             $table->json('json_data_after_validating_otp_decrypted')->nullable();
             $table->timestamps();

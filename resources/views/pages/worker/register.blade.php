@@ -35,42 +35,33 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="inputName">Worker Name</label>
-                                <input type="text" class="form-control" id="inputName" name="worker_name" placeholder="Enter Worker Name" value="{{ old('worker_name') }}">
-                            </div>
-                            <div class="form-group">
                                 <label for="inputUAN">UAN</label>
-                                <input type="number" class="form-control" id="inputUAN" name="worker_uan" placeholder="Enter UAN" value="{{ old('worker_uan') }}">
+                                <input type="number" class="form-control @error('worker_uan') is-invalid @enderror" id="inputUAN" name="worker_uan" placeholder="Enter UAN" value="{{ old('worker_uan') }}">
+                                @error('worker_uan')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="inputDOB">Date of Birth</label>
-                                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" id="inputDOB" name="worker_dob" placeholder="DD-MMM-YYYY" value="{{ old('worker_dob') }}">
+                                <div class="input-group date @error('worker_dob') is-invalid @enderror" id="reservationdate" data-target-input="nearest">
+                                    <input type="text" class="form-control datetimepicker-input @error('worker_dob') is-invalid @enderror" data-target="#reservationdate" id="inputDOB" name="worker_dob" placeholder="DD-MMM-YYYY" value="{{ old('worker_dob') }}">
                                     <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputGender">Gender</label>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" {{ old('gender') == 'Male' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="genderMale">Male</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" {{ old('gender') == 'Female' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="genderFemale">Female</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="gender" id="genderOther" value="Other" {{ old('gender') == 'Other' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="genderOther">Other</label>
+                                    @error('worker_dob')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <!-- /.card-body -->
         
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Request OTP</button>
                             <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>
                     </form>

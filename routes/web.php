@@ -40,6 +40,7 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']],
     // Register Worker Flow
     Route::get('/register-worker', [WorkerController::class, 'registerWorker'])->name('register-worker');
     Route::post('/validate-worker-otp', [WorkerController::class, 'validateWorkerOTP'])->name('validate-worker-otp');
+    Route::get('/validate-otp', [WorkerController::class, 'validateOTP'])->name('validate-otp');
     Route::post('/validating-otp', [WorkerController::class, 'validatingOTP'])->name('validating-otp');
     Route::post('/post-eshram-data', [WorkerController::class, 'postEshramData'])->name('post-eshram-data');
 });
