@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('l_g_d_states', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->integer('l_g_d_code')->unique();
             $table->string('name_en', 100);
             $table->string('name_local', 150)->nullable();

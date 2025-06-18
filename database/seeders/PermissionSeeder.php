@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
+use App\Models\Permission;
 
 class PermissionSeeder extends Seeder
 {
@@ -14,6 +14,8 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
+        Permission::truncate();
+
         $permissions = [
             'user create', 'user edit', 'user delete', 'user view',
             'role create', 'role edit', 'role delete', 'role view',

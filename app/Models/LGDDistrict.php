@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class LGDDistrict extends Model
 {
+    use HasUuids;
     protected $fillable = [
         'state_code',
         'state_name',

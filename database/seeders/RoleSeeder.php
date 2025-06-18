@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
@@ -13,6 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        Role::truncate();
         Role::create(['name' => config('constants.ROLES.PORTAL_ADMIN')]);
         Role::create(['name' => config('constants.ROLES.ADMIN')]);
         Role::create(['name' => config('constants.ROLES.WELFARE_COMMISSIONER')]);

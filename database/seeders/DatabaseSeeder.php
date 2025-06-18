@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             $this->call(RoleSeeder::class);
             $this->call(PermissionSeeder::class);
 
+            User::truncate();
 
             $portal_admin = User::factory()->create([
                 'name' => 'Portal Admin NIC',

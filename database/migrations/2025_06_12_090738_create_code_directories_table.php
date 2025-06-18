@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('code_directories', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('code');
             $table->string('name');
             $table->string('table_name');

@@ -137,37 +137,37 @@
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
                                             <a href="{{ route('register-worker') }}" class="nav-link {{ request()->routeIs('register-worker') ? 'active' : '' }}">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-circle"></i>
                                                 <p>Register Worker</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-registered"></i>
                                                 <p>Registered Workers</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-id-card"></i>
                                                 <p>Generate ID Card</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-circle"></i>
                                                 <p>Add Family Member</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-circle"></i>
                                                 <p>Add Benefit</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
+                                                <i class="nav-icon far fa-circle"></i>
                                                 <p>View Benefits</p>
                                             </a>
                                         </li>
@@ -185,13 +185,13 @@
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
                                                 <a href=#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Report 1</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Report 2</p>
                                                 </a>
                                             </li>
@@ -213,61 +213,61 @@
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
                                                 <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>All Codes</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Marital Status</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Social Category</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Gender</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Worker Relationship</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Worker Type</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Disability</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Education</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Migration Reason</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.*') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>Address Type</p>
                                                 </a>
                                             </li>
@@ -289,13 +289,13 @@
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
                                                 <a href="{{ route('l-g-d-state.index') }}" class="nav-link {{ request()->routeIs('l-g-d-state.index') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>LGD State</p>
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="{{ route('l-g-d-district.index') }}" class="nav-link {{ request()->routeIs('l-g-d-district.index') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon far fa-circle"></i>
                                                     <p>LGD DIstrict</p>
                                                 </a>
                                             </li>
@@ -308,17 +308,29 @@
                                     @endphp
                                     <li class="nav-item {{ $user_active ? 'menu-open' : '' }}">
                                         <a href="#" class="nav-link {{ $user_active ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-folder-open"></i>
+                                            <i class="nav-icon fas fa-user-cog"></i>
                                             <p>
-                                                Users
+                                                URP
                                                 <i class="fas fa-angle-left right"></i>
                                             </p>
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
                                                 <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <i class="nav-icon fas fa-users"></i>
                                                     <p>Users</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link ">
+                                                    <i class="nav-icon fas fa-user-tag"></i>
+                                                    <p>Roles</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link ">
+                                                    <i class="nav-icon fas fa-user-lock"></i>
+                                                    <p>Permissions</p>
                                                 </a>
                                             </li>
                                         </ul>

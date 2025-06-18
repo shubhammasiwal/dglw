@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('worker_types', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
-            $table->foreignId('code_directory_id')->constrained('code_directories')->onDelete('cascade');
+            $table->uuid('code_directory_id');
+            $table->foreign('code_directory_id')->references('id')->on('code_directories')->onDelete('cascade');
             $table->timestamps();
         });
     }
