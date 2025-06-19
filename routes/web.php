@@ -42,7 +42,20 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']],
     Route::post('/validate-worker-otp', [WorkerController::class, 'validateWorkerOTP'])->name('validate-worker-otp');
     Route::get('/validate-otp', [WorkerController::class, 'validateOTP'])->name('validate-otp');
     Route::post('/validating-otp', [WorkerController::class, 'validatingOTP'])->name('validating-otp');
-    Route::post('/post-eshram-data', [WorkerController::class, 'postEshramData'])->name('post-eshram-data');
+    Route::post('/save-eshram-data', [WorkerController::class, 'saveEshramData'])->name('save-eshram-data');
+
+    // Registered Worker
+    Route::get('/registered-workers', [WorkerController::class, 'registeredWorkers'])->name('registered-workers');
+    Route::get('/registered-workers/{registered_worker}', [WorkerController::class, 'showRegisteredWorker'])->name('show-registered-worker');
+    // Route::get('/registered-workers/{registered_worker}/edit', [WorkerController::class, 'editRegisteredWorker'])->name('edit-registered-worker');
+    // Route::put('/registered-workers/{registered_worker}', [WorkerController::class, 'updateRegisteredWorker'])->name('update-registered-worker');
+    // Route::delete('/registered-workers/{registered_worker}', [WorkerController::class, 'destroyRegisteredWorker'])->name('destroy-registered-worker');
+
+    // Add Family Flow
+    // Route::get('/add-family-form', [WorkerController::class, 'addFamilyForm'])->name('add-family-form');
+    Route::get('/add-family-form', function() {
+        return 'kkkk';
+    })->name('add-family-form');
 });
 
 Route::group(['middleware' => ['role:portal_admin|admin']], function () {

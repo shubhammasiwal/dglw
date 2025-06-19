@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'REGISTER WORKER | VIEW ESHRAM DATA')
+@section('title', 'REGISTERED WORKER | VIEW WORKER DATA')
 
 @section('content')
 <!-- Content Header -->
@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <div class="row mb-2 align-items-center">
             <div class="col-sm-6">
-                <h1 class="m-0">Worker | View Eshram Data</h1>
+                <h1 class="m-0">Registered Worker | View Worker Data</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    Worker's Menu /
-                    <li class="breadcrumb-item active"><a href="{{ route('register-worker') }}">Register Worker</a></li>
+                    Registered Worker's Menu /
+                    <li class="breadcrumb-item active"><a href="{{ route('registered-workers') }}">Registered Workers</a></li>
                 </ol>
             </div>
         </div>
@@ -33,19 +33,7 @@
                         <img src="{{ $data['photoAsPerEshram'] ? asset('storage/' . $data['photoAsPerEshram']) : asset('images/profile_picture_101.jpg') }}"
                              alt="Profile Picture" class="img-fluid rounded-circle mb-3" style="max-width: 160px;">
                         <h3>{{ $data['name'] }}</h3>
-                        <p class="border-bottom pb-2 mb-3">{{ $data['genderCode'] == 'M' ? 'Male' : 'Female' }}</p>
-
-                        <form action="{{ route('save-eshram-data') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="session_data" value="{{ json_encode(session('data')) }}">
-                            
-                            <div class="mt-3">
-                                <button type="submit" name="action" value="save_only" class="btn btn-primary">Save Worker</button>
-                                <button type="submit" name="action" value="save_and_add_family" class="btn btn-success mr-2">Save Worker & Add Family</button>
-                            </div>
-                        </form>
-
-
+                        <p class="border-bottom pb-2 mb-3">{{ $data['genderLabel'] ?? 'N/A' }}</p>
                     </div>
 
                     <!-- Right Side: CV Details -->
@@ -57,11 +45,8 @@
                             <div class="col-sm-6"><strong>Date of Birth:</strong> {{ \Carbon\Carbon::parse($data['dateOfBirth'])->format('d-M-Y') }}</div>
                         </div>
                         <div class="row mb-2">
-                            <div class="col-sm-6"><strong>Marital Status:</strong>
-                                @php
-                                    $maritalStatusMap = ['1' => 'Single', '2' => 'Married', '3' => 'Divorced', '4' => 'Widowed'];
-                                @endphp
-                                {{ $maritalStatusMap[$data['maritalStatusCode']] ?? 'N/A' }}
+                           <div class="col-sm-6"><strong>Marital Status:</strong>
+                                {{ $data['maritalStatusLabel'] ?? 'N/A' }}
                             </div>
                             <div class="col-sm-6"><strong>Guardian Name:</strong> {{ $data['guardianname'] ?: 'N/A' }}</div>
                         </div>

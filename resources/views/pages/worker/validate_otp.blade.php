@@ -55,6 +55,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            @isset($worker_mobile_field)
+                                <label>Worker Mobile Number</label>
+                                <input type="text" class="form-control @error('worker_mobile_number') is-invalid @enderror"
+                                    id="inputMobileNumber" name="worker_mobile_number" placeholder="Enter Mobile Number">
+                            @else
+                                <input type="hidden" class="form-control @error('worker_mobile_number') is-invalid @enderror"
+                                    id="inputMobileNumber" name="worker_mobile_number" value="{{ old('worker_mobile_number', $worker_mobile_number ?? '') }}">
+                            @endisset
+                            @error('worker_mobile_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label for="inputOTP">OTP</label>
                             <input type="number" class="form-control @error('worker_otp') is-invalid @enderror"
                                 id="inputOTP" name="worker_otp" placeholder="Enter OTP" value="{{ old('worker_otp') }}">
@@ -65,14 +80,13 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="hidden" class="form-control @error('worker_mobile_number') is-invalid @enderror"
-                                id="inputMobileNumber" name="worker_mobile_number" placeholder="Enter Mobile Number"
-                                value="{{ old('worker_mobile_number', $worker_mobile_number ?? '') }}">
-                            @error('worker_mobile_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <label>Type of Worker</label>
+                            <select name="worker_type" class="form-control" required>
+                                <option value="">Select</option>
+                                @foreach ($worker_type as $type)
+                                    <option value="{{ $type->codeDirectory->code }}">{{ $type->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <div class="form-check">

@@ -7,6 +7,6 @@
     <h1 class="display-1 text-danger">403</h1>
     <h2 class="mb-4">Access Forbidden</h2>
     <p class="lead">Sorry, you do not have permission to access this page.</p>
-    <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Go Back</a>
+    <a href="{{ url('/') }}" class="btn btn-primary mt-3">Go Home</a>
 </div>
 @endsection
