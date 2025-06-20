@@ -306,7 +306,7 @@ class WorkerController extends Controller
 
     public function registeredWorkers() {
         try {
-            $registered_workers = Worker::all();
+            $registered_workers = Worker::with('workerType.codeDirectory')->get();
             return view('pages.worker.registered_workers', [
                 'registered_workers' => $registered_workers
             ]);
@@ -368,6 +368,16 @@ class WorkerController extends Controller
                 'worker_uan' => $worker->uan_number,
             ]);
 
+        } catch (\Throwable $th) {
+            return view('errors.error', ['message' => $th->getMessage()]);
+        }
+    }
+
+    public function destroyRegisteredWorker($id) {
+        try {
+            $worker = Worker::findOrFail($id);
+            $worker->delete();
+            return redirect()->route('registered-workers')->with('success', 'Worker deleted successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

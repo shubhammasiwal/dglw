@@ -43,6 +43,7 @@
                                 <th>ID</th>
                                 <th>UAN Number</th>
                                 <th>Aadhar Name</th>
+                                <th>Worker Type</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -54,6 +55,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td>{{ $registered_worker->uan_number }}</td>
                                     <td>{{ $registered_worker->aadhar_name }}</td>
+                                    <td>{{ $registered_worker->workerType->codeDirectory->name }}</td>
                                     <td>{{ $registered_worker->created_at }}</td>
                                     <td>{{ $registered_worker->updated_at }}</td>
                                     <td>
@@ -61,11 +63,7 @@
                                             title="View">
                                             <i class="nav-icon fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('gender.edit', $registered_worker->id) }}"
-                                            title="Edit">
-                                            <i class="nav-icon fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('gender.destroy', $registered_worker->id) }}"
+                                        <form action="{{ route('destroy-registered-worker', $registered_worker->id) }}"
                                             method="POST">
                                             @csrf
                                             @method('DELETE')

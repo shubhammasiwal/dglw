@@ -49,7 +49,7 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']],
     Route::get('/registered-workers/{registered_worker}', [WorkerController::class, 'showRegisteredWorker'])->name('show-registered-worker');
     // Route::get('/registered-workers/{registered_worker}/edit', [WorkerController::class, 'editRegisteredWorker'])->name('edit-registered-worker');
     // Route::put('/registered-workers/{registered_worker}', [WorkerController::class, 'updateRegisteredWorker'])->name('update-registered-worker');
-    // Route::delete('/registered-workers/{registered_worker}', [WorkerController::class, 'destroyRegisteredWorker'])->name('destroy-registered-worker');
+    Route::delete('/registered-workers/{registered_worker}', [WorkerController::class, 'destroyRegisteredWorker'])->name('destroy-registered-worker');
 
     // Add Family Flow
     // Route::get('/add-family-form', [WorkerController::class, 'addFamilyForm'])->name('add-family-form');
