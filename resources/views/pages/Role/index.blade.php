@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'GENDER')
+@section('title', 'ROLES')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,18 +8,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Gender</h1>
+                    <h1 class="m-0">Roles</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('gender.index') }}">Gender</a></li>
-                        <li class="breadcrumb-item active">Gender</li>
+                        <li class="breadcrumb-item"><a href="{{ route('roles.index') }}">Roles</a></li>
+                        <li class="breadcrumb-item active">Roles</li>
                     </ol>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <a href="{{ route('gender.create') }}" class="btn btn-primary">Create Gender</a>
                 </div>
             </div>
         </div>
@@ -42,42 +37,21 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Code</th>
-                                <th>Name</th>
-                                <th>Category Type</th>
+                                <th>Code Label</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($genders as $gender)
+                            @foreach ($roles as $role)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $gender->codeDirectory->code }}</td>
-                                    <td>{{ $gender->codeDirectory->name }}</td>
-                                    <td>{{ $gender->table_name_label }}</td>
-                                    <td>{{ $gender->created_at }}</td>
-                                    <td>{{ $gender->updated_at }}</td>
-                                    <td>
-                                        <a href="{{ route('gender.show', $gender->id) }}"
-                                            title="View">
-                                            <i class="nav-icon fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{ route('gender.edit', $gender->id) }}"
-                                            title="Edit">
-                                            <i class="nav-icon fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('gender.destroy', $gender->id) }}"
-                                            method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" title="Delete"
-                                                onclick="return confirm('Are you sure?')"
-                                                style="color: red; border: none; background: transparent;">
-                                                <i class="nav-icon fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->role_label }}</td>
+                                    <td>{{ $role->created_at }}</td>
+                                    <td>{{ $role->updated_at }}</td>
+                                    <td><a href="{{ route('roles.permissions', $role->uuid) }}" class="btn btn-primary"><i class="fas fa-user-lock"></i>Assign Permissions</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

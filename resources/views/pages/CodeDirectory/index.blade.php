@@ -41,9 +41,9 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Category Type</th>
                                 <th>Code</th>
                                 <th>Name</th>
-                                <th>Category Type</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
@@ -54,9 +54,9 @@
                                 @if ($code_directory)
                                     <tr>
                                         <td>{{ $loop->index + 1 }}</td>
+                                        <td>{{ $code_directory->table_name }}</td>
                                         <td>{{ $code_directory->code }}</td>
                                         <td>{{ $code_directory->name }}</td>
-                                        <td>{{ $code_directory->table_name }}</td>
                                         <td>{{ $code_directory->created_at }}</td>
                                         <td>{{ $code_directory->updated_at }}</td>
                                         <td>
@@ -69,7 +69,7 @@
                                                 <i class="nav-icon fas fa-edit"></i>
                                             </a>
                                             <form action="{{ route('code-directory.destroy', $code_directory->id) }}"
-                                                method="POST">
+                                                method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" title="Delete"

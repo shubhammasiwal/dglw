@@ -68,7 +68,7 @@
                                             <i class="nav-icon fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('worker-type.destroy', $worker_type->id) }}"
-                                            method="POST">
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete"

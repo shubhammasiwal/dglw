@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'USER | SHOW')
+@section('title', 'PERMISSION | SHOW')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,18 +8,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">User | Show</h1>
+                    <h1 class="m-0">Permission | Show</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Users</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Permissions</a></li>
                         <li class="breadcrumb-item active">Show</li>
                     </ol>
                 </div>
             </div>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                    <a href="{{ route('permissions.edit', $permission->uuid) }}" class="btn btn-primary">Edit</a>
                 </div>
             </div>
         </div>
@@ -33,38 +33,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">User Details</h3>
+                            <h3 class="card-title">Permission Details</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                            <table class="table table-bordered">
-                               <tr>
-                                   <th>Name</th>
-                                   <td>{{ $user->name }}</td>
-                               </tr>
-                               <tr>
-                                   <th>Email</th>
-                                   <td>{{ $user->email }}</td>
-                               </tr>
-                               <tr>
-                                   <th>Role</th>
-                                   <td>{{ $user->role }}</td>
-                               </tr>
-                               <tr>
-                                   <th>Permission</th>
-                                   <td>
-                                       @foreach ($user->permissions_name as $permission)
-                                           <span class="badge badge-primary">{{ $permission }}</span>
-                                       @endforeach
-                                   </td>
-                               </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <td>{{ $permission->name }}</td>
+                                </tr>
                                 <tr>
                                     <th>Created At</th>
-                                    <td>{{ $user->created_at }}</td>
+                                    <td>{{ $permission->created_at }}</td>
                                 </tr>
                                 <tr>
                                     <th>Updated At</th>
-                                    <td>{{ $user->updated_at }}</td>
+                                    <td>{{ $permission->updated_at }}</td>
                                 </tr>
                             </table>
                         </div>

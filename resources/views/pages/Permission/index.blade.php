@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('title', 'GENDER')
+@section('title', 'PERMISSIONS')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -8,18 +8,18 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Gender</h1>
+                    <h1 class="m-0">Permissions</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('gender.index') }}">Gender</a></li>
-                        <li class="breadcrumb-item active">Gender</li>
+                        <li class="breadcrumb-item"><a href="{{ route('permissions.index') }}">Permissions</a></li>
+                        <li class="breadcrumb-item active">Permissions</li>
                     </ol>
                 </div>
             </div>
-            <div class="row mb-2">
+             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <a href="{{ route('gender.create') }}" class="btn btn-primary">Create Gender</a>
+                    <a href="{{ route('permissions.create') }}" class="btn btn-primary">Create Permission</a>
                 </div>
             </div>
         </div>
@@ -41,33 +41,29 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Code</th>
                                 <th>Name</th>
-                                <th>Category Type</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($genders as $gender)
+                            @foreach ($permissions as $permission)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $gender->codeDirectory->code }}</td>
-                                    <td>{{ $gender->codeDirectory->name }}</td>
-                                    <td>{{ $gender->table_name_label }}</td>
-                                    <td>{{ $gender->created_at }}</td>
-                                    <td>{{ $gender->updated_at }}</td>
+                                    <td>{{ $permission->name }}</td>
+                                    <td>{{ $permission->created_at }}</td>
+                                    <td>{{ $permission->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('gender.show', $gender->id) }}"
+                                        <a href="{{ route('permissions.show', $permission->uuid) }}"
                                             title="View">
                                             <i class="nav-icon fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('gender.edit', $gender->id) }}"
+                                        <a href="{{ route('permissions.edit', $permission->uuid) }}"
                                             title="Edit">
                                             <i class="nav-icon fas fa-edit"></i>
                                         </a>
-                                        <form action="{{ route('gender.destroy', $gender->id) }}"
+                                        <form action="{{ route('permissions.destroy', $permission->uuid) }}"
                                             method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')

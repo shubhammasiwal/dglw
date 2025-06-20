@@ -4,6 +4,7 @@ use App\Models\SocialCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Role\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\LGD\LGDStateController;
 use App\Http\Controllers\Gender\GenderController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\LGD\LGDDistrictController;
 use App\Http\Controllers\Address\AddressTypeController;
 use App\Http\Controllers\Education\EducationController;
 use App\Http\Controllers\Disability\DisabilityController;
+use App\Http\Controllers\Permission\PermissionController;
 use App\Http\Controllers\WorkerType\WorkerTypeController;
 use App\Http\Controllers\CodeDirectory\CodeDirectoryController;
 use App\Http\Controllers\MaritalStatus\MaritalStatusController;
@@ -38,18 +40,16 @@ Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner|dat
 
 Route::group(['middleware' => ['role:portal_admin|admin|welfare_commissioner']], function () {
     // Register Worker Flow
-    Route::get('/register-worker', [WorkerController::class, 'registerWorker'])->name('register-worker');
-    Route::post('/validate-worker-otp', [WorkerController::class, 'validateWorkerOTP'])->name('validate-worker-otp');
-    Route::get('/validate-otp', [WorkerController::class, 'validateOTP'])->name('validate-otp');
-    Route::post('/validating-otp', [WorkerController::class, 'validatingOTP'])->name('validating-otp');
-    Route::post('/save-eshram-data', [WorkerController::class, 'saveEshramData'])->name('save-eshram-data');
+    Route::get('/register-worker', [WorkerController::class, 'registerWorker'])->name('register-worker')->middleware('can: worker create');
+    Route::post('/validate-worker-otp', [WorkerController::class, 'validateWorkerOTP'])->name('validate-worker-otp')->middleware('can: worker create');
+    Route::get('/validate-otp', [WorkerController::class, 'validateOTP'])->name('validate-otp')->middleware('can: worker create');
+    Route::post('/validating-otp', [WorkerController::class, 'validatingOTP'])->name('validating-otp')->middleware('can: worker create');
+    Route::post('/save-eshram-data', [WorkerController::class, 'saveEshramData'])->name('save-eshram-data')->middleware('can: worker create');
 
     // Registered Worker
-    Route::get('/registered-workers', [WorkerController::class, 'registeredWorkers'])->name('registered-workers');
-    Route::get('/registered-workers/{registered_worker}', [WorkerController::class, 'showRegisteredWorker'])->name('show-registered-worker');
-    // Route::get('/registered-workers/{registered_worker}/edit', [WorkerController::class, 'editRegisteredWorker'])->name('edit-registered-worker');
-    // Route::put('/registered-workers/{registered_worker}', [WorkerController::class, 'updateRegisteredWorker'])->name('update-registered-worker');
-    Route::delete('/registered-workers/{registered_worker}', [WorkerController::class, 'destroyRegisteredWorker'])->name('destroy-registered-worker');
+    Route::get('/registered-workers', [WorkerController::class, 'registeredWorkers'])->name('registered-workers')->middleware('can: worker view');
+    Route::get('/registered-workers/{registered_worker}', [WorkerController::class, 'showRegisteredWorker'])->name('show-registered-worker')->middleware('can: worker view');
+    Route::delete('/registered-workers/{registered_worker}', [WorkerController::class, 'destroyRegisteredWorker'])->name('destroy-registered-worker')->middleware('can: worker delete');
 
     // Add Family Flow
     // Route::get('/add-family-form', [WorkerController::class, 'addFamilyForm'])->name('add-family-form');
@@ -77,5 +77,11 @@ Route::group(['middleware' => ['role:portal_admin|admin']], function () {
 
     // User Route
     Route::resource('users', UserController::class);
+    // Role Route
+    Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('roles/{role}/permissions', [RoleController::class, 'assignPermissions'])->name('roles.permissions');
+    Route::post('store-role-permissions', [RoleController::class, 'storeRolePermissions'])->name('store-role-permissions');
+    // Permissions Route
+    Route::resource('permissions', PermissionController::class);
 });
 

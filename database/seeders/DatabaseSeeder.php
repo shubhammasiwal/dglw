@@ -9,6 +9,7 @@ use Database\Seeders\RoleSeeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Database\Seeders\PermissionSeeder;
+use Database\Seeders\CodeDirectorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -59,6 +60,7 @@ class DatabaseSeeder extends Seeder
 
             $this->call(LGDStateSeeder::class);
             $this->call(LGDDistrictSeeder::class);
+            $this->call(CodeDirectorySeeder::class);
 
         } catch (\Exception $e) {
             dd($e);

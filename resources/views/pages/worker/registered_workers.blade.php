@@ -64,7 +64,7 @@
                                             <i class="nav-icon fas fa-eye"></i>
                                         </a>
                                         <form action="{{ route('destroy-registered-worker', $registered_worker->id) }}"
-                                            method="POST">
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete"

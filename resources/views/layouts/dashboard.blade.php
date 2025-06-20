@@ -31,6 +31,9 @@
         <link rel="stylesheet" href="{{ asset('vendor/daterangepicker/css/daterangepicker.css') }}">
         <!-- summernote -->
         <link rel="stylesheet" href="{{ asset('vendor/summernote/css/summernote-bs4.min.css') }}">
+        <!-- Select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
         @stack('styles')
 
     </head>
@@ -96,7 +99,7 @@
                     <span class="brand-text font-weight-light">{{ env('APP_NAME') }}</span>
                 </a>
 
-                @role(['portal_admin', 'admin', 'welfare_commissioner', 'data_operator'])
+                @canany($all_permissions)
                     <!-- Sidebar -->
                     <div class="sidebar">
                         <!-- Sidebar user panel (optional) -->
@@ -122,226 +125,248 @@
                                     </a>
                                 </li>
 
-                                {{-- Check for active menu for Worker --}}
+                                {{-- Worker Menu --}}
                                 @php
-                                    $worker_active = request()->routeIs('register-worker');
+                                    $worker_active = request()->routeIs('register-worker') || request()->routeIs('registered-workers');
+                                    $show_worker_menu = 
+                                        in_array('worker create', $auth_user_permissions) ||
+                                        in_array('worker edit', $auth_user_permissions) ||
+                                        in_array('worker delete', $auth_user_permissions);
                                 @endphp
-                                <li class="nav-item {{ $worker_active ? 'menu-open' : '' }}">
-                                    <a href="#" class="nav-link {{ $worker_active ? 'active' : '' }}">
-                                        <i class="nav-icon fas fa-th"></i>
+
+                                @if($show_worker_menu)
+                                    <li class="nav-item {{ $worker_active ? 'menu-open' : '' }}">
+                                        <a href="#" class="nav-link {{ $worker_active ? 'active' : '' }}">
+                                            <i class="nav-icon fas fa-th"></i>
+                                            <p>
+                                                Worker's Menu
+                                                <i class="fas fa-angle-left right"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            @if(in_array('worker create', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="{{ route('register-worker') }}" class="nav-link {{ request()->routeIs('register-worker') ? 'active' : '' }}">
+                                                        <i class="nav-icon fas fa-user-plus"></i>
+                                                        <p>Register Worker</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if(in_array('worker edit', $auth_user_permissions) || in_array('worker create', $auth_user_permissions) || in_array('worker delete', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="{{ route('registered-workers') }}" class="nav-link">
+                                                        <i class="nav-icon fas fa-user-check"></i>
+                                                        <p>Registered Workers</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if(in_array('generate id card', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="#" class="nav-link">
+                                                        <i class="nav-icon far fa-id-card"></i>
+                                                        <p>Generate ID Card</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if(in_array('add family member', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="#" class="nav-link">
+                                                        <i class="nav-icon fas fa-house-user"></i>
+                                                        <p>Add Family Member</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if(in_array('add benefit', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="#" class="nav-link">
+                                                        <i class="nav-icon fas fa-hand-holding-medical"></i>
+                                                        <p>Add Benefit</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+
+                                            @if(in_array('view benefits', $auth_user_permissions))
+                                                <li class="nav-item">
+                                                    <a href="#" class="nav-link">
+                                                        <i class="nav-icon fas fa-hand-pointer"></i>
+                                                        <p>View Benefits</p>
+                                                    </a>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    </li>
+                                @endif
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-chart-pie"></i>
                                         <p>
-                                            Worker's Menu
+                                            Reports
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href=#" class="nav-link">
+                                                <i class="nav-icon fas fa-file-alt"></i>
+                                                <p>Report 1</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="nav-icon fas fa-file-alt"></i>
+                                                <p>Report 2</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                {{-- Check for active menu for Directory Code --}}
+                                @php
+                                    $directory_code_active = request()->routeIs('code-directory.*') || request()->routeIs('marital-status.*') || request()->routeIs('social-category.*') || request()->routeIs('gender.*') || request()->routeIs('worker-relationship.*') || request()->routeIs('worker-type.*') || request()->routeIs('disability.*') || request()->routeIs('education.*') || request()->routeIs('migration-reason.*') || request()->routeIs('address-type.*');
+                                @endphp
+                                <li class="nav-item {{ $directory_code_active ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $directory_code_active ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-folder-open"></i>
+                                        <p>
+                                            Directory Code
                                             <i class="fas fa-angle-left right"></i>
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="{{ route('register-worker') }}" class="nav-link {{ request()->routeIs('register-worker') ? 'active' : '' }}">
-                                                <i class="nav-icon fas fa-user-plus"></i>
-                                                <p>Register Worker</p>
+                                            <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-code"></i>
+                                                <p>All Codes</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('registered-workers') }}" class="nav-link">
-                                                <i class="nav-icon fas fa-user-check"></i>
-                                                <p>Registered Workers</p>
+                                            <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-ring"></i>
+                                                <p>Marital Status</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="nav-icon far fa-id-card"></i>
-                                                <p>Generate ID Card</p>
+                                            <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-users"></i>
+                                                <p>Social Category</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="nav-icon fas fa-house-user"></i>
-                                                <p>Add Family Member</p>
+                                            <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-venus-mars"></i>
+                                                <p>Gender</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="nav-icon fas fa-hand-holding-medical"></i>
-                                                <p>Add Benefit</p>
+                                            <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-handshake"></i>
+                                                <p>Worker Relationship</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="nav-icon fas fa-hand-pointer"></i>
-                                                <p>View Benefits</p>
+                                            <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-briefcase"></i>
+                                                <p>Worker Type</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-wheelchair"></i>
+                                                <p>Disability</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-graduation-cap"></i>
+                                                <p>Education</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-route"></i>
+                                                <p>Migration Reason</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.*') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-map-marker-alt"></i>
+                                                <p>Address Type</p>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                @unlessrole('data_operator')
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="nav-icon fas fa-chart-pie"></i>
-                                            <p>
-                                                Reports
-                                                <i class="right fas fa-angle-left"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href=#" class="nav-link">
-                                                    <i class="nav-icon fas fa-file-alt"></i>
-                                                    <p>Report 1</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <i class="nav-icon fas fa-file-alt"></i>
-                                                    <p>Report 2</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
 
-                                    {{-- Check for active menu for Directory Code --}}
-                                    @php
-                                        $directory_code_active = request()->routeIs('code-directory.*') || request()->routeIs('marital-status.*') || request()->routeIs('social-category.*') || request()->routeIs('gender.*') || request()->routeIs('worker-relationship.*') || request()->routeIs('worker-type.*') || request()->routeIs('disability.*') || request()->routeIs('education.*') || request()->routeIs('migration-reason.*') || request()->routeIs('address-type.*');
-                                    @endphp
-                                    <li class="nav-item {{ $directory_code_active ? 'menu-open' : '' }}">
-                                        <a href="#" class="nav-link {{ $directory_code_active ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-folder-open"></i>
-                                            <p>
-                                                Directory Code
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="{{ route('code-directory.index') }}" class="nav-link {{ request()->routeIs('code-directory.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon fas fa-code"></i>
-                                                    <p>All Codes</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('marital-status.index') }}" class="nav-link {{ request()->routeIs('marital-status.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-ring"></i>
-                                                    <p>Marital Status</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('social-category.index') }}" class="nav-link {{ request()->routeIs('social-category.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-users"></i>
-                                                    <p>Social Category</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('gender.index') }}" class="nav-link {{ request()->routeIs('gender.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-venus-mars"></i>
-                                                    <p>Gender</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('worker-relationship.index') }}" class="nav-link {{ request()->routeIs('worker-relationship.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-handshake"></i>
-                                                    <p>Worker Relationship</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('worker-type.index') }}" class="nav-link {{ request()->routeIs('worker-type.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-briefcase"></i>
-                                                    <p>Worker Type</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('disability.index') }}" class="nav-link {{ request()->routeIs('disability.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-wheelchair"></i>
-                                                    <p>Disability</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('education.index') }}" class="nav-link {{ request()->routeIs('education.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-graduation-cap"></i>
-                                                    <p>Education</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('migration-reason.index') }}" class="nav-link {{ request()->routeIs('migration-reason.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-route"></i>
-                                                    <p>Migration Reason</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('address-type.index') }}" class="nav-link {{ request()->routeIs('address-type.*') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-map-marker-alt"></i>
-                                                    <p>Address Type</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                {{-- Check for active menu for LGD Code --}}
+                                @php
+                                    $lgd_code_active = request()->routeIs('l-g-d-state.index') || request()->routeIs('l-g-d-district.index');
+                                @endphp
+                                <li class="nav-item {{ $lgd_code_active ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $lgd_code_active ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-folder-open"></i>
+                                        <p>
+                                            LGD Code
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('l-g-d-state.index') }}" class="nav-link {{ request()->routeIs('l-g-d-state.index') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-map"></i>
+                                                <p>LGD State</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('l-g-d-district.index') }}" class="nav-link {{ request()->routeIs('l-g-d-district.index') ? 'active' : '' }}">
+                                                <i class="nav-icon far fas fa-map-marker-alt"></i>
+                                                <p>LGD DIstrict</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 
-                                    {{-- Check for active menu for LGD Code --}}
-                                    @php
-                                        $lgd_code_active = request()->routeIs('l-g-d-state.index') || request()->routeIs('l-g-d-district.index');
-                                    @endphp
-                                    <li class="nav-item {{ $lgd_code_active ? 'menu-open' : '' }}">
-                                        <a href="#" class="nav-link {{ $lgd_code_active ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-folder-open"></i>
-                                            <p>
-                                                LGD Code
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="{{ route('l-g-d-state.index') }}" class="nav-link {{ request()->routeIs('l-g-d-state.index') ? 'active' : '' }}">
-                                                    <i class="nav-icon fas fa-map"></i>
-                                                    <p>LGD State</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="{{ route('l-g-d-district.index') }}" class="nav-link {{ request()->routeIs('l-g-d-district.index') ? 'active' : '' }}">
-                                                    <i class="nav-icon far fas fa-map-marker-alt"></i>
-                                                    <p>LGD DIstrict</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    {{-- Check for active menu for Users --}}
-                                    @php
-                                        $user_active = request()->routeIs('users.index');
-                                    @endphp
-                                    <li class="nav-item {{ $user_active ? 'menu-open' : '' }}">
-                                        <a href="#" class="nav-link {{ $user_active ? 'active' : '' }}">
-                                            <i class="nav-icon fas fa-user-cog"></i>
-                                            <p>
-                                                URP
-                                                <i class="fas fa-angle-left right"></i>
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
-                                            <li class="nav-item">
-                                                <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'active' : '' }}">
-                                                    <i class="nav-icon fas fa-users"></i>
-                                                    <p>Users</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link ">
-                                                    <i class="nav-icon fas fa-user-tag"></i>
-                                                    <p>Roles</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link ">
-                                                    <i class="nav-icon fas fa-user-lock"></i>
-                                                    <p>Permissions</p>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                @endunlessrole
+                                {{-- Check for active menu for Users --}}
+                                @php
+                                    $user_active = request()->routeIs('users.*') || request()->routeIs('roles.*') || request()->routeIs('permissions.*');
+                                @endphp
+                                <li class="nav-item {{ $user_active ? 'menu-open' : '' }}">
+                                    <a href="#" class="nav-link {{ $user_active ? 'active' : '' }}">
+                                        <i class="nav-icon fas fa-user-cog"></i>
+                                        <p>
+                                            URP
+                                            <i class="fas fa-angle-left right"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-users"></i>
+                                                <p>Users</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('roles.index') }}" class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-user-tag"></i>
+                                                <p>Roles</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('permissions.index') }}" class="nav-link {{ request()->routeIs('permissions.*') ? 'active' : '' }}">
+                                                <i class="nav-icon fas fa-user-lock"></i>
+                                                <p>Permissions</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </nav>
                         <!-- /.sidebar-menu -->
                     </div>
                     <!-- /.sidebar -->
-                @endrole
+                @endcanany
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
@@ -390,6 +415,9 @@
         <script src="{{ asset('vendor/overlayScrollbars/js/OverlayScrollbars.min.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('vendor/adminlte/dist/js/adminlte.js') }}"></script>
+        <!-- Select2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
         @stack('scripts')
     </body>
 

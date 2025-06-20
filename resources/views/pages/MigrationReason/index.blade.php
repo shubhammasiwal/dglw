@@ -68,7 +68,7 @@
                                             <i class="nav-icon fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('migration-reason.destroy', $migration_reason->id) }}"
-                                            method="POST">
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete"

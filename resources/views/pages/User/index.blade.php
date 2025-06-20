@@ -30,6 +30,12 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card ">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table id="codeDirectoryTable" class="table table-bordered table-striped table-hover table-sm shadow">
                         <thead>
@@ -62,7 +68,7 @@
                                             <i class="nav-icon fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('users.destroy', $user->id) }}"
-                                            method="POST">
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete"

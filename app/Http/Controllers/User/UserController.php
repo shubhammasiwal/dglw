@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\User\NewUserNotification;
 use App\Http\Requests\User\StoreUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -74,13 +75,17 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        $user = User::with('roles')->findOrFail($id);
-        $user->role = $user->roles->pluck('name')->implode(', ');
-        $user->role_label = collect($user->roles->pluck('name'))->map(function($role) {
-            return config('constants.ROLES_LABEL')[strtoupper($role)] ?? $role;
-        })->implode(', ');
-        $user->permissions = $user->getPermissionsViaRoles()->pluck('name');
-        return view('pages.User.show', compact('user'));
+        try {
+            $user = User::with('roles')->findOrFail($id);
+            $user->role = $user->roles->pluck('name')->implode(', ');
+            $user->role_label = collect($user->roles->pluck('name'))->map(function($role) {
+                return config('constants.ROLES_LABEL')[strtoupper($role)] ?? $role;
+            })->implode(', ');
+            $user->permissions_name = $user->getPermissionsViaRoles()->pluck('name');
+            return view('pages.User.show', compact('user'));
+        } catch (\Throwable $th) {
+            return view('errors.error', ['message' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -88,12 +93,18 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $worker_relationship = User::with('codeDirectory')->findOrFail($id);
-        $worker_relationship->table_name_label = $this->table_name;
-        return view('pages.User.edit', [
-            'worker_relationship' => $worker_relationship,
-            'table_name' => $this->table_name
-        ]);
+        try {
+            $user = User::findOrFail($id);
+            $user->load('roles');
+            $user->role = $user->roles->pluck('name')->implode(', ');
+            $roles = Role::all()->map(function ($role) {
+                $role->role_label = config('constants.ROLES_LABEL')[strtoupper($role->name)] ?? $role->name;
+                return $role;
+            });
+            return view('pages.User.edit', compact(['user', 'roles']));
+        } catch (\Throwable $th) {
+            return view('errors.error', ['message' => $th->getMessage()]);
+        }
     }
 
     /**
@@ -102,22 +113,21 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, string $id)
     {
         try {
-            $worker_relationship = User::findOrFail($id);
-
             $data = [
-                'code' => $request->input('code'),
                 'name' => $request->input('name'),
-                'table_name' => $request->input('table_name'),
+                'email' => $request->input('email'),
             ];
+            if( $request->input('password')) {
+                $data['password'] = Hash::make($request->input('password'));
+            }
 
-            $code_directory = $worker_relationship->codeDirectory;
-            $code_directory->update($data);
+            $user = User::findOrFail($id);
+            $user->update($data);
+            $user_role = $request->input('role');
+            $user->roles()->detach();
+            $user->assignRole($user_role);
 
-            $worker_relationship->update([
-                'name' => $data['name'],
-            ]);
-
-            return redirect()->route('worker-relationship.index')->with('success', 'Worker Relationship updated successfully.');
+            return redirect()->route('users.index')->with('success', 'User updated successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }
@@ -129,10 +139,9 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
-            $worker_relationship = User::findOrFail($id);
-            $worker_relationship->codeDirectory()->delete();
-            $worker_relationship->delete();
-            return redirect()->route('worker-relationship.index')->with('success', 'Worker Relationship deleted successfully.');
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'User deleted successfully.');
         } catch (\Throwable $th) {
             return view('errors.error', ['message' => $th->getMessage()]);
         }

@@ -19,7 +19,10 @@ class PermissionSeeder extends Seeder
         $permissions = [
             'user create', 'user edit', 'user delete', 'user view',
             'role create', 'role edit', 'role delete', 'role view',
-            'worker create', 'worker edit', 'worker delete', 'worker view',
+            'worker create', 'worker delete', 'worker view',
+            'generate id card', 
+            'family member create', 'family member edit', 'family member delete', 'family member view',
+            'benefit create', 'benefit edit', 'benefit delete', 'benefit view',
         ];
 
         foreach ($permissions as $permission) {

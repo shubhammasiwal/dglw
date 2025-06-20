@@ -68,7 +68,7 @@
                                             <i class="nav-icon fas fa-edit"></i>
                                         </a>
                                         <form action="{{ route('marital-status.destroy', $marital_status->id) }}"
-                                            method="POST">
+                                            method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" title="Delete"
